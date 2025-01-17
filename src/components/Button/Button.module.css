@@ -1,6 +1,7 @@
 .button {
     border: none;
     border-radius: .25rem;
+    cursor: pointer;
     display: inline-block;
     font-weight: 600;
     padding: .5rem 2rem;
@@ -10,9 +11,20 @@
 .button.save {
     background-color: var(--pelorous-500);
     color: var(--pelorous-950);
+    margin-top: 1rem;
+}
+
+.button.save:hover {
+    background-color: var(--pelorous-950);
+    color: var(--pelorous-50);
 }
 
 .button.search {
     background-color: var(--pelorous-950);
     color: var(--pelorous-50);
+}
+
+.button.search:hover {
+    background-color: var(--pelorous-500);
+    color: var(--pelorous-950);
 }
