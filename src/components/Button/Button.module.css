@@ -1,0 +1,12 @@
+.button {
+    border: none;
+    border-radius: .25rem;
+    display: inline-block;
+    padding: .5rem 2rem;
+    text-transform: uppercase;
+}
+
+.button.search {
+    background-color: var(--pelorous-950);
+    color: var(--pelorous-50);
+}

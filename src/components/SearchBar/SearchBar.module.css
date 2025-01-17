@@ -1,0 +1,30 @@
+.search {
+    padding: 2rem 0;
+}
+
+.search form {
+    margin: 0 auto;
+    max-width: 300px;
+    text-align: center;
+}
+
+.search input {
+    border: 1px solid var(--pelorous-700);
+    color: var(--pelorous-800);
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    padding: .5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.search input:focus-visible {
+    outline-color: var(--pelorous-400);
+}
+
+.search input::placeholder {
+    color: var(--pelorous-600);
+    opacity: 0.5;
+}
