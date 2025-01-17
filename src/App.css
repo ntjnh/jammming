@@ -1,0 +1,24 @@
+/* Colours:
+    950 - Header background, song title
+    900 - Artist name, Search button background
+    800 - Add icon
+    700 - Column backgrounds (0.8 opacity)
+    600 - Track border, Column border
+    500 - Primary, Save button background
+    50 - Text on dark bgs
+*/
+
+:root {
+    --pelorous-950: #0c3040;
+    --pelorous-900: #1b4b5e;
+    --pelorous-800: #1c596e;
+    --pelorous-700: #176d87;
+    --pelorous-600: #1487a6;
+    --pelorous-500: #16b5d4;
+    --pelorous-400: #30c5e0;
+    --pelorous-300: #71deef;
+    --pelorous-200: #abedf6;
+    --pelorous-100: #d2f6fb;
+    --pelorous-50: #edfdfe;
+    --pelorous-0: #ffffff;
+}
