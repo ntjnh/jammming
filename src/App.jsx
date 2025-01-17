@@ -1,9 +1,9 @@
 import React from 'react'
 import './App.css'
-import Header from './components/Header'
-import SearchBar from './components/SearchBar'
-import SearchResults from './components/SearchResults'
-import Playlist from './components/Playlist'
+import Header from './components/Header/Header'
+import SearchBar from './components/SearchBar/SearchBar'
+import SearchResults from './components/SearchResults/SearchResults'
+import Playlist from './components/Playlist/Playlist'
 
 function App() {
     return (
