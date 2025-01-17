@@ -14,12 +14,12 @@ function App() {
                 <div className="container">
                     <SearchBar />
 
-                    <div>
-                        <div>
+                    <div className="columns">
+                        <div className="column column--left">
                             <SearchResults />
                         </div>
 
-                        <div>
+                        <div className="column column--right">
                             <Playlist />
                         </div>
                     </div>
