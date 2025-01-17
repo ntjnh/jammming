@@ -2,8 +2,14 @@
     border: none;
     border-radius: .25rem;
     display: inline-block;
+    font-weight: 600;
     padding: .5rem 2rem;
     text-transform: uppercase;
+}
+
+.button.save {
+    background-color: var(--pelorous-500);
+    color: var(--pelorous-950);
 }
 
 .button.search {
