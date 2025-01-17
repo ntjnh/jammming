@@ -1,0 +1,10 @@
+.header {
+    background-color: var(--pelorous-950);
+    color: var(--pelorous-0);
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.header span {
+    color: var(--pelorous-500)
+}
