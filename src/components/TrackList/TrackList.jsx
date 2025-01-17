@@ -1,5 +1,5 @@
 import React from 'react'
-import Track from './Track'
+import Track from '../Track/Track'
 
 export default function TrackList({ tracks }) {
     const tracksList = tracks.map((track, i) => {

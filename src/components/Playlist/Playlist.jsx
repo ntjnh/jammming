@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from './Button'
-import TrackList from './TrackList'
+import Button from '../Button/Button'
+import TrackList from '../TrackList/TrackList'
 
 export default function Playlist() {
     const toSave = [
