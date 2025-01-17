@@ -11,7 +11,7 @@
 .button.save {
     background-color: var(--pelorous-500);
     color: var(--pelorous-950);
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .button.save:hover {
