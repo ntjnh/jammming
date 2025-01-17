@@ -21,9 +21,9 @@ export default function Playlist() {
 
     return (
         <section className={styles.playlist}>
-            <input type="text" name="playlistTitle" id="playlistTitle" value="New Playlist" />
+            <input type="text" name="playlistTitle" id="playlistTitle" placeholder="New Playlist" />
 
-            <TrackList tracks={toSave} />
+            <TrackList list="playlist" tracks={toSave} />
 
             <Button
                 style="save"
