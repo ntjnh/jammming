@@ -1,10 +1,11 @@
 /* Colours:
     950 - Header background, song title
-    900 - Artist name, Search button background
+    900 - Search button background
     800 - Add icon
     700 - Column backgrounds (0.8 opacity)
     600 - Track border, Column border
     500 - Primary, Save button background
+    100 - Artist name
     50 - Text on dark bgs
 */
 
@@ -50,13 +51,21 @@ input {
 }
 
 main {
-    background: url('./assets/background.jpg') no-repeat 50% 75%;
-    background-size: cover;
-    min-height: calc(100vh - 80px);
-    position: relative;
+    padding-bottom: 5rem;
 }
 
-main::before {
+main .bg {
+    background: url('./assets/background.jpg') no-repeat 50% 75%;
+    background-size: cover;
+    left: 0;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+main .bg::before {
     background-color: rgba(12, 48, 64, 0.5);
     content: "";
     height: 100%;
@@ -64,6 +73,7 @@ main::before {
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: 2;
 }
 
 .container {
@@ -81,7 +91,7 @@ main::before {
 }
 
 .column {
-    min-height: 520px;
+    min-height: min-content;
     width: 100%;
 }
 

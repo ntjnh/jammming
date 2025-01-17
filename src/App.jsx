@@ -11,6 +11,7 @@ function App() {
             <Header />
 
             <main>
+                <div className="bg"></div>
                 <div className="container">
                     <SearchBar />
 
