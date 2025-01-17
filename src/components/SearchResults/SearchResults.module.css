@@ -7,3 +7,8 @@
     min-height: 100%;
     padding: 1.125rem 1.5rem;
 }
+
+.results h2 {
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}

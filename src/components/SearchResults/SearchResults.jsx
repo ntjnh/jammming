@@ -38,7 +38,7 @@ export default function SearchResults() {
         <section className={styles.results}>
             <h2>Results</h2>
 
-            <TrackList tracks={results} />
+            <TrackList list="results" tracks={results} />
         </section>
     )
 }
