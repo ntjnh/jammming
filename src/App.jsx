@@ -11,7 +11,7 @@ function App() {
             <Header />
 
             <main>
-                <div>
+                <div className="container">
                     <SearchBar />
 
                     <div>
