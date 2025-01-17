@@ -9,6 +9,7 @@
 */
 
 :root {
+    --fontface: "Inter", system-ui, Helvetica, Arial, sans-serif;
     --pelorous-950: #0c3040;
     --pelorous-900: #1b4b5e;
     --pelorous-800: #1c596e;
@@ -21,6 +22,30 @@
     --pelorous-100: #d2f6fb;
     --pelorous-50: #edfdfe;
     --pelorous-0: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fontface);
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-synthesis: none;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+    min-width: 320px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input {
+    font-family: var(--fontface);
 }
 
 .container {
