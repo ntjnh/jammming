@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from '../Button/Button'
+import styles from './SearchBar.module.css'
 
 export default function SearchBar() {
     return (
-        <section>
+        <section className={styles.search}>
             <form>
                 <input type="text" name="song" id="song" placeholder="Enter a song title" />
 

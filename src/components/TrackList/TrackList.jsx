@@ -1,5 +1,6 @@
 import React from 'react'
 import Track from '../Track/Track'
+import styles from './TrackList.module.css'
 
 export default function TrackList({ tracks }) {
     const tracksList = tracks.map((track, i) => {
@@ -13,7 +14,7 @@ export default function TrackList({ tracks }) {
     })
 
     return (
-        <ul>
+        <ul className={styles.tracklist}>
             {tracksList}
         </ul>
     )

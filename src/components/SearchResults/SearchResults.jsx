@@ -1,5 +1,6 @@
 import React from 'react'
 import TrackList from '../TrackList/TrackList'
+import styles from './SearchResults.module.css'
 
 export default function SearchResults() {
     const results = [
@@ -34,7 +35,7 @@ export default function SearchResults() {
     ]
         
     return (
-        <section>
+        <section className={styles.results}>
             <h2>Results</h2>
 
             <TrackList tracks={results} />

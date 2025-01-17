@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../Button/Button'
 import TrackList from '../TrackList/TrackList'
+import styles from './Playlist.module.css'
 
 export default function Playlist() {
     const toSave = [
@@ -19,7 +20,7 @@ export default function Playlist() {
     ]
 
     return (
-        <section>
+        <section className={styles.playlist}>
             <input type="text" name="playlistTitle" id="playlistTitle" value="New Playlist" />
 
             <TrackList tracks={toSave} />
