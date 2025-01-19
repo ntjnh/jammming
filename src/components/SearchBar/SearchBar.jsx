@@ -11,7 +11,6 @@ export default function SearchBar() {
                 <Button
                     style="search"
                     label="Search"
-                    type="submit"
                 />
             </form>
         </section>
