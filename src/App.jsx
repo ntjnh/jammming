@@ -10,77 +10,76 @@ const mockResults = [
         id: '0yi1bc2os',
         song: 'You & I',
         artist: 'Bru-C',
-        album: 'Original Sounds',
-        saved: false
+        album: 'Original Sounds'
     },
     {
         id: '3mi4ny5yg',
         song: 'Miss Independent',
         artist: 'Ne-Yo',
-        album: 'Year of the Gentleman',
-        saved: false
+        album: 'Year of the Gentleman'
     },
     {
         id: '6au7kl8sc',
         song: 'Adore U',
         artist: 'Khalid',
-        album: 'Sincere',
-        saved: false
+        album: 'Sincere'
     },
     {
         id: '9cf0bl1cf',
         song: 'California',
         artist: 'blink-182',
-        album: 'California',
-        saved: false
+        album: 'California'
     },
     {
         id: '2ns3sf4ck',
         song: 'No Solution',
         artist: 'Sum 41',
-        album: 'Chuck',
-        saved: false
+        album: 'Chuck'
     },
     {
         id: '5tw6nf7rs',
         song: 'Trainwreck',
         artist: 'New Found Glory',
-        album: 'Radiosurgery',
-        saved: false
+        album: 'Radiosurgery'
     },
     {
         id: '8ss9ds0ds',
         song: 'Sultans of Swing',
         artist: 'Dire Straits',
-        album: 'Dire Straits',
-        saved: false
+        album: 'Dire Straits'
     },
     {
         id: '1ne2bc3fo',
         song: 'No Excuses',
         artist: 'Bru-C',
-        album: 'Family Only',
-        saved: true
+        album: 'Family Only'
     },
     {
         id: '4al5ny6al',
         song: 'Another Love Song',
         artist: 'Ne-Yo',
-        album: 'Another Love Song',
-        saved: true
+        album: 'Another Love Song'
     },
     {
         id: '7ew8kl9sc',
         song: 'Everything We See',
         artist: 'Khalid',
-        album: 'Sincere',
-        saved: true
+        album: 'Sincere'
     }
 ]
 
 
 function App() {
     const [results, setResults] = useState(mockResults)
+    const [playlistName, setPlaylistName] = useState('')
+    const [playlistTracks, setPlaylistTracks] = useState([mockResults[9], mockResults[8], mockResults[7]])
+
+    const onPlaylistNameChange = e => setPlaylistName(e.target.value)
+
+    const onSave = e => {
+        e.preventDefault()
+        // send info to spotify
+    }
 
     return (
         <>
@@ -97,7 +96,14 @@ function App() {
                         </div>
 
                         <div className="column column--right">
-                            <Playlist data={results} remove={setResults} />
+                            <Playlist
+                                playlistName={playlistName}
+                                playlistTracks={playlistTracks}
+                                onPlaylistNameChange={onPlaylistNameChange}
+                                onSave={onSave}
+                                removeTrack={setPlaylistTracks}
+                                returnTrackToResults={setResults}
+                            />
                         </div>
                     </div>
                 </div>
