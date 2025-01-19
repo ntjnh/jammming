@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Button.module.css'
 
-export default function Button({ style, label, type }) {
+export default function Button({ style, label }) {
     return (
-        <button className={`${styles.button} ${styles[style]}`} type={type}>
+        <button className={`${styles.button} ${styles[style]}`} type="submit">
             {label}
         </button>
     )
