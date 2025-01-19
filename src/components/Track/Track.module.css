@@ -28,3 +28,9 @@
     right: 0;
     top: 7px;
 }
+
+.track .divider {
+    font-size: 10px;
+    position: relative;
+    top: -1px;
+}
