@@ -3,11 +3,11 @@ import Track from '../Track/Track'
 import styles from './TrackList.module.css'
 
 export default function TrackList({ tracks, list }) {
-    const tracksList = tracks.map((track, i) => {
+    const tracksList = tracks.map(track => {
         return (
             <Track
-                key={`track-${i}`}
-                title={track.title}
+                key={track.id}
+                song={track.song}
                 artist={track.artist}
                 list={list}
             />
