@@ -84,6 +84,14 @@ function App() {
         setResults(prev => prev.filter(track => track.id !== trackId))
     }
 
+    const onRemove = e => {
+        const trackId = e.target.id
+        const trackToRemove = playlistTracks.filter(track => track.id === trackId)[0]
+
+        setResults(prev => [trackToRemove, ...prev])
+        setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
+    }
+
     const onSave = e => {
         e.preventDefault()
         // send info to spotify
@@ -100,7 +108,7 @@ function App() {
 
                     <div className="columns">
                         <div className="column column--left">
-                            <SearchResults data={results} add={setResults} onAdd={onAdd} />
+                            <SearchResults data={results} onAdd={onAdd} />
                         </div>
 
                         <div className="column column--right">
@@ -109,8 +117,7 @@ function App() {
                                 playlistTracks={playlistTracks}
                                 onPlaylistNameChange={onPlaylistNameChange}
                                 onSave={onSave}
-                                removeTrack={setPlaylistTracks}
-                                returnTrackToResults={setResults}
+                                onRemove={onRemove}
                             />
                         </div>
                     </div>

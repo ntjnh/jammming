@@ -7,8 +7,7 @@ export default function Playlist({
     playlistName,
     onPlaylistNameChange,
     playlistTracks,
-    removeTrack,
-    returnTrackToResults,
+    onRemove,
     onSave
 }) {
 
@@ -27,8 +26,7 @@ export default function Playlist({
                 <TrackList
                     list="playlist"
                     tracks={playlistTracks}
-                    removeTrack={removeTrack}
-                    returnTrackToResults={returnTrackToResults}
+                    onRemove={onRemove}
                 />
 
                 <Button
