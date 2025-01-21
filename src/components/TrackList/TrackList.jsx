@@ -2,16 +2,18 @@ import React from 'react'
 import Track from '../Track/Track'
 import styles from './TrackList.module.css'
 
-export default function TrackList({ tracks, list, removeTrack }) {
+export default function TrackList({ tracks, list, onAdd, onRemove }) {
     const tracksList = tracks.map(track => {
         return (
             <Track
                 key={track.id}
+                trackId={track.id}
                 song={track.song}
                 artist={track.artist}
                 album={track.album}
                 list={list}
-                removeTrack={removeTrack}
+                onAdd={onAdd}
+                onRemove={onRemove}
             />
         )
     })

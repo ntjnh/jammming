@@ -72,9 +72,17 @@ const mockResults = [
 function App() {
     const [results, setResults] = useState(mockResults)
     const [playlistName, setPlaylistName] = useState('')
-    const [playlistTracks, setPlaylistTracks] = useState([mockResults[9], mockResults[8], mockResults[7]])
+    const [playlistTracks, setPlaylistTracks] = useState([])
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
+
+    const onAdd = e => {
+        const trackId = e.target.id
+        const trackToAdd = results.filter(track => track.id === trackId)[0]
+
+        setPlaylistTracks(prev => [trackToAdd, ...prev])
+        setResults(prev => prev.filter(track => track.id !== trackId))
+    }
 
     const onSave = e => {
         e.preventDefault()
@@ -92,7 +100,7 @@ function App() {
 
                     <div className="columns">
                         <div className="column column--left">
-                            <SearchResults data={results} add={setResults} />
+                            <SearchResults data={results} add={setResults} onAdd={onAdd} />
                         </div>
 
                         <div className="column column--right">
