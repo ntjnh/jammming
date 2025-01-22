@@ -10,69 +10,80 @@ const mockResults = [
         id: '0yi1bc2os',
         song: 'You & I',
         artist: 'Bru-C',
-        album: 'Original Sounds'
+        album: 'Original Sounds',
+        uri: 'https://spotify.com/track/arandomidorsomething/you-i'
     },
     {
         id: '3mi4ny5yg',
         song: 'Miss Independent',
         artist: 'Ne-Yo',
-        album: 'Year of the Gentleman'
+        album: 'Year of the Gentleman',
+        uri: 'https://spotify.com/track/arandomidorsomething/miss-independent'
     },
     {
         id: '6au7kl8sc',
         song: 'Adore U',
         artist: 'Khalid',
-        album: 'Sincere'
+        album: 'Sincere',
+        uri: 'https://spotify.com/track/arandomidorsomething/adore-u'
     },
     {
         id: '9cf0bl1cf',
         song: 'California',
         artist: 'blink-182',
-        album: 'California'
+        album: 'California',
+        uri: 'https://spotify.com/track/arandomidorsomething/california'
     },
     {
         id: '2ns3sf4ck',
         song: 'No Solution',
         artist: 'Sum 41',
-        album: 'Chuck'
+        album: 'Chuck',
+        uri: 'https://spotify.com/track/arandomidorsomething/no-solution'
     },
     {
         id: '5tw6nf7rs',
         song: 'Trainwreck',
         artist: 'New Found Glory',
-        album: 'Radiosurgery'
+        album: 'Radiosurgery',
+        uri: 'https://spotify.com/track/arandomidorsomething/trainwreck'
     },
     {
         id: '8ss9ds0ds',
         song: 'Sultans of Swing',
         artist: 'Dire Straits',
-        album: 'Dire Straits'
+        album: 'Dire Straits',
+        uri: 'https://spotify.com/track/arandomidorsomething/sultans-of-swing'
     },
     {
         id: '1ne2bc3fo',
         song: 'No Excuses',
         artist: 'Bru-C',
-        album: 'Family Only'
+        album: 'Family Only',
+        uri: 'https://spotify.com/track/arandomidorsomething/no-excuses'
     },
     {
         id: '4al5ny6al',
         song: 'Another Love Song',
         artist: 'Ne-Yo',
-        album: 'Another Love Song'
+        album: 'Another Love Song',
+        uri: 'https://spotify.com/track/arandomidorsomething/another-love-song'
     },
     {
         id: '7ew8kl9sc',
         song: 'Everything We See',
         artist: 'Khalid',
-        album: 'Sincere'
+        album: 'Sincere',
+        uri: 'https://spotify.com/track/arandomidorsomething/everything-we-see'
     }
 ]
 
 
 function App() {
     const [results, setResults] = useState(mockResults)
-    const [playlistName, setPlaylistName] = useState('')
+    const [playlistName, setPlaylistName] = useState('Smash Hits')
     const [playlistTracks, setPlaylistTracks] = useState([])
+    const [playlistUris, setPlaylistUris] = useState([])
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
@@ -94,7 +105,15 @@ function App() {
 
     const onSave = e => {
         e.preventDefault()
-        // send info to spotify
+
+        const uris = []
+        playlistTracks.forEach(track => uris.push(track.uri))
+        setPlaylistUris(() => [uris])
+        
+        // Reset existing playlist
+        setPlaylistTracks(() => [])
+
+        // playlistName and playlistUris to be sent to spotify
     }
 
     return (
