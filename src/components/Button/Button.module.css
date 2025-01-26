@@ -8,6 +8,14 @@
     text-transform: uppercase;
 }
 
+.button.save.disabled,
+.button.save.disabled:hover {
+    color: var(--pelorous-950);
+    cursor: default;
+    background-color: grey;
+    opacity: 0.3;
+}
+
 .button.save {
     background-color: var(--pelorous-500);
     color: var(--pelorous-950);
