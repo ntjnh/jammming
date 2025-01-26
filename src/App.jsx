@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
+import authenticate from './modules/authenticate'
+import getAccessToken from './modules/getAccessToken'
 import Header from './components/Header/Header'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
@@ -78,12 +80,12 @@ const mockResults = [
     }
 ]
 
-
 function App() {
     const [results, setResults] = useState(mockResults)
-    const [playlistName, setPlaylistName] = useState('Smash Hits')
+    const [playlistName, setPlaylistName] = useState('New Playlist1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [playlistUris, setPlaylistUris] = useState([])
+    const [accessToken, setAccessToken] = useState('')
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
@@ -103,17 +105,38 @@ function App() {
         setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
     }
 
+    // const onLogin = () => {
+    //     authenticate()
+    // }
+
+    useEffect(() => {
+        if (window.location.pathname === "/callback") {
+            const hash = window.location.hash
+    
+            getAccessToken(hash, setAccessToken)
+        }
+    }, [])
+
     const onSave = e => {
         e.preventDefault()
 
-        const uris = []
-        playlistTracks.forEach(track => uris.push(track.uri))
-        setPlaylistUris(() => [uris])
-        
-        // Reset existing playlist
-        setPlaylistTracks(() => [])
+        authenticate()
 
-        // playlistName and playlistUris to be sent to spotify
+        // If user is logged into their Spotify account
+        if (accessToken) {
+
+            // const uris = []
+            // playlistTracks.forEach(track => uris.push(track.uri))
+            // setPlaylistUris(() => [uris])
+            
+            // // Reset existing playlist
+            // setPlaylistTracks(() => [])
+    
+            // playlistName and playlistUris to be sent to spotify
+
+        } else {
+            // direct user to go and login and authorise
+        }   
     }
 
     return (
