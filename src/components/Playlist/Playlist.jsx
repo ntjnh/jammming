@@ -1,4 +1,3 @@
-import React from 'react'
 import Button from '../Button/Button'
 import TrackList from '../TrackList/TrackList'
 import styles from './Playlist.module.css'
