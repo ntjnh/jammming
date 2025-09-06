@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import authenticate from './modules/authenticate'
-import getAccessToken from './modules/getAccessToken'
+
+import authorisation from './modules/authorisation'
+import getToken from './modules/getToken'
+
 import Header from './components/Header/Header'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
@@ -85,7 +87,7 @@ function App() {
     const [playlistName, setPlaylistName] = useState('New Playlist1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [playlistUris, setPlaylistUris] = useState([])
-    const [accessToken, setAccessToken] = useState('')
+    const [accessToken, setAccessToken] = useState(window.localStorage.access_token ? window.localStorage.access_token : '')
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
@@ -111,19 +113,32 @@ function App() {
 
     useEffect(() => {
         if (window.location.pathname === "/callback") {
-            const hash = window.location.hash
-    
-            getAccessToken(hash, setAccessToken)
+            if (!window.localStorage.access_token) {
+                const generateToken = async () => await getToken(setAccessToken)
+                generateToken()
+            }
         }
     }, [])
 
-    const onSave = e => {
+    // TODO: Delete this
+    async function getProfile() {
+        const response = await fetch('https://api.spotify.com/v1/me', {
+            headers: {
+                Authorization: 'Bearer ' + accessToken
+            }
+        })
+
+        const data = await response.json()
+        console.log(data)
+    }
+
+    const onSave = async e => {
         e.preventDefault()
 
-        authenticate()
-
-        // If user is logged into their Spotify account
+        // If already authorised
         if (accessToken) {
+            // TODO: Delete this
+            getProfile()
 
             // const uris = []
             // playlistTracks.forEach(track => uris.push(track.uri))
@@ -135,7 +150,7 @@ function App() {
             // playlistName and playlistUris to be sent to spotify
 
         } else {
-            // direct user to go and login and authorise
+            await authorisation()
         }   
     }
 
