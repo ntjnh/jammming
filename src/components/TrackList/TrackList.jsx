@@ -7,9 +7,9 @@ export default function TrackList({ tracks, list, onAdd, onRemove }) {
             <Track
                 key={track.id}
                 trackId={track.id}
-                song={track.song}
-                artist={track.artist}
-                album={track.album}
+                song={track.name}
+                artist={track.artists[0].name}
+                album={track.album.name}
                 list={list}
                 onAdd={onAdd}
                 onRemove={onRemove}
