@@ -30,10 +30,9 @@ export default function SearchBar({ accessToken, setResults }) {
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="song"
-                    id="song"
                     ref={searchRef}
-                    placeholder="Enter a song title" />
+                    placeholder="Enter a song title"
+                    required />
 
                 <Button style="search" label="Search" />
             </form>
