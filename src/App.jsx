@@ -20,10 +20,15 @@ function App() {
 
     const onAdd = e => {
         const trackId = e.target.id
-        const trackToAdd = results.filter(track => track.id === trackId)[0]
+        const resultsList = results.tracks.items
+        const trackToAdd = resultsList.filter(track => track.id === trackId)[0]
 
         setPlaylistTracks(prev => [trackToAdd, ...prev])
-        setResults(prev => prev.filter(track => track.id !== trackId))
+        setResults(prev => {
+            let items = prev.tracks.items
+            prev.tracks.items = items.filter(track => track.id !== trackId)
+            return prev
+        })
     }
 
     const onRemove = e => {
