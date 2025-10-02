@@ -2,10 +2,10 @@ import Track from '../Track/Track'
 import styles from './TrackList.module.css'
 
 export default function TrackList({ tracks, list, onAdd, onRemove }) {
-    const tracksList = tracks.map(track => {
+    const tracksList = tracks.map((track, idx) => {
         return (
             <Track
-                key={track.id}
+                key={idx}
                 trackId={track.id}
                 song={track.name}
                 artist={track.artists[0].name}
