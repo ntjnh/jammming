@@ -15,6 +15,9 @@ function App() {
     const [playlistName, setPlaylistName] = useState('New Playlist1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [accessToken, setAccessToken] = useState('')
+    const [userId, setUserId] = useState('')
+    const [playlistId, setPlaylistId] = useState('5gmW1T3ASErqz81nnhpg9N')
+    const [playlistToSave, setPlaylistToSave] = useState([])
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
@@ -24,18 +27,11 @@ function App() {
         const trackToAdd = resultsList.filter(track => track.id === trackId)[0]
 
         setPlaylistTracks(prev => [trackToAdd, ...prev])
-        setResults(prev => {
-            let items = prev.tracks.items
-            prev.tracks.items = items.filter(track => track.id !== trackId)
-            return prev
-        })
     }
 
     const onRemove = e => {
         const trackId = e.target.id
-        const trackToRemove = playlistTracks.filter(track => track.id === trackId)[0]
 
-        setResults(prev => [trackToRemove, ...prev])
         setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
     }
 
@@ -62,8 +58,9 @@ function App() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log('profile info:')
-            console.log(data)
+            // console.log('profile info:')
+            // console.log(data)
+            setUserId(data.id)
         })
         .catch(e => console.error(e))
     }
@@ -74,6 +71,72 @@ function App() {
         // If already authorised
         if (accessToken) {
             getProfile()
+
+            // if (userId) {
+
+            //     try {
+            //         const createPlaylistEndpoint = `https://api.spotify.com/v1/users/${userId}/playlists`
+        
+            //         const test_count = Number(window.localStorage.getItem('jammming_test_count'))
+            //         let newCount = test_count + 1
+    
+            //         window.localStorage.setItem('jammming_test_count', newCount)
+    
+            //         await fetch(createPlaylistEndpoint, {
+            //             method: 'POST',
+            //             body: JSON.stringify({
+            //                 name: playlistName,
+            //                 description: `Made by the jammming web app - test ${newCount}`,
+            //                 public: false
+            //             }),
+            //             headers: {
+            //                 Authorization: 'Bearer ' + accessToken,
+            //                 'Content-Type': 'application/json'
+            //             }
+            //         })
+            //         .then(res => {
+            //             if (!res.ok) {
+            //                 throw new Error(`HTTP error! Status: ${res.status}`);
+            //             }
+
+            //             return res.json()
+            //         })
+            //         .then(data => console.log(data))
+            //     } catch (e) {
+            //         console.error(`Error: ${e}`)
+            //     }
+            // }
+
+            if (playlistId) {
+                setPlaylistToSave(playlistTracks.map(track => track.uri))
+    
+                const addToPlaylistEndpoint = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`
+
+                try {
+                    await fetch(addToPlaylistEndpoint, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            uris: playlistToSave
+                        }),
+                        headers: {
+                            Authorization: 'Bearer ' + accessToken,
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(res => {
+                        if (!res.ok) {
+                            console.log(res)
+                            throw new Error(`HTTP Error: Status ${res.status}`);
+                        }
+
+                        return res.json()
+                    })
+                    .then(data => console.log(data))
+                } catch (e) {
+                    console.error(`${e.message}`)
+                }
+            }
+
         } else {
             await authorisation()
         }   
