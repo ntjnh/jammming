@@ -18,6 +18,7 @@ export default function Track({ trackId, song, artist, album, list, onAdd, onRem
                 className={styles.toggle}
                 onClick={handleClick}
                 id={trackId}
+                type="button"
             >
                 {list === 'results' ? '+' : '-'}
             </button>
