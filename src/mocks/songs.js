@@ -14,7 +14,8 @@ export default {
                     spotify: `https://open.spotify.com/track/0yi1bc2os`
                 },
                 id: '0yi1bc2os',
-                name: 'You & I'
+                name: 'You & I',
+                uri: 'spotify:track:0yi1bc2os'
             },
             {
                 album: {
@@ -29,7 +30,8 @@ export default {
                     spotify: `https://open.spotify.com/track/3mi4ny5yg`
                 },
                 id: '3mi4ny5yg',
-                name: 'Miss Independent'
+                name: 'Miss Independent',
+                uri: 'spotify:track:3mi4ny5yg'
             },
             {
                 album: {
@@ -44,7 +46,8 @@ export default {
                     spotify: `https://open.spotify.com/track/6au7kl8sc`
                 },
                 id: '6au7kl8sc',
-                name: 'Adore U'
+                name: 'Adore U',
+                uri: 'spotify:track:6au7kl8sc'
             },
             {
                 album: {
@@ -59,7 +62,8 @@ export default {
                     spotify: `https://open.spotify.com/track/9cf0bl1cf`
                 },
                 id: '9cf0bl1cf',
-                name: 'California'
+                name: 'California',
+                uri: 'spotify:track:9cf0bl1cf'
             },
             {
                 album: {
@@ -74,7 +78,8 @@ export default {
                     spotify: `https://open.spotify.com/track/2ns3sf4ck`
                 },
                 id: '2ns3sf4ck',
-                name: 'No Solution'
+                name: 'No Solution',
+                uri: 'spotify:track:2ns3sf4ck'
             },
             {
                 album: {
@@ -89,7 +94,8 @@ export default {
                     spotify: `https://open.spotify.com/track/5tw6nf7rs`
                 },
                 id: '5tw6nf7rs',
-                name: 'Trainwreck'
+                name: 'Trainwreck',
+                uri: 'spotify:track:5tw6nf7rs'
             },
             {
                 album: {
@@ -104,7 +110,8 @@ export default {
                     spotify: `https://open.spotify.com/track/8ss9ds0ds`
                 },
                 id: '8ss9ds0ds',
-                name: 'Sultans of Swing'
+                name: 'Sultans of Swing',
+                uri: 'spotify:track:8ss9ds0ds'
             },
             {
                 album: {
@@ -119,7 +126,8 @@ export default {
                     spotify: `https://open.spotify.com/track/1ne2bc3fo`
                 },
                 id: '1ne2bc3fo',
-                name: 'No Excuses'
+                name: 'No Excuses',
+                uri: 'spotify:track:1ne2bc3fo'
             },
             {
                 album: {
@@ -134,7 +142,8 @@ export default {
                     spotify: `https://open.spotify.com/track/4al5ny6al`
                 },
                 id: '4al5ny6al',
-                name: 'Another Love Song'
+                name: 'Another Love Song',
+                uri: 'spotify:track:4al5ny6al'
             },
             {
                 album: {
@@ -149,7 +158,8 @@ export default {
                     spotify: `https://open.spotify.com/track/7ew8kl9sc`
                 },
                 id: '7ew8kl9sc',
-                name: 'Everything We See'
+                name: 'Everything We See',
+                uri: 'spotify:track:7ew8kl9sc'
             }
         ]
     }
