@@ -32,6 +32,8 @@ const getToken = async setAccessToken => {
         })
         .then(data => {
             localStorage.setItem('access_token', data.access_token)
+            localStorage.setItem('refresh_token', data.refresh_token)
+            localStorage.setItem('tokenExpired', false)
             setAccessToken(data.access_token)
         })
         .catch(error => console.error(error))
