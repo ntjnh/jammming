@@ -1,4 +1,4 @@
-const getRefreshToken = async () => {
+const getRefreshToken = async setAccessToken => {
     const clientId = import.meta.env.VITE_CLIENT_ID
 
    // refresh token that has been previously stored
@@ -22,6 +22,8 @@ const getRefreshToken = async () => {
     localStorage.setItem('access_token', response.access_token)
     if (response.refresh_token) {
         localStorage.setItem('refresh_token', response.refresh_token)
+        localStorage.setItem('tokenExpired', false)
+        setAccessToken(response.access_token)
     }
 }
 
