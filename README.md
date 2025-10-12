@@ -40,7 +40,7 @@ You will use your knowledge of React components, passing state and requests with
 - [x] [Implement Saving the Playlist to a User's Account](#implement-saving-the-playlist-to-a-users-account)
 - [x] [Obtain a Spotify Access Token](#obtain-a-spotify-access-token)
 - [x] [Implement Spotify Search Request](#implement-spotify-search-request)
-- [ ] [Save a User's Playlist](#save-a-users-playlist)
+- [x] [Save a User's Playlist](#save-a-users-playlist)
 - [ ] [Testing and Debugging](#testing-and-debugging)
 - [ ] [Review Your Project](#review-your-project)
 

@@ -1,27 +1,34 @@
-import { base64encode, generateCodeVerifier, sha256 } from './codeChallenge'
+// When we have an access token, then the application has full authorisation
+
+import authentication from './authentication'
+import getToken from './getToken'
 
 export default async function authorisation() {
-    const clientId = import.meta.env.VITE_CLIENT_ID
-    const redirectUri = 'http://localhost:5173/callback'
-    
-    const scope = 'playlist-modify-private playlist-modify-public'
-    const authUrl = new URL('https://accounts.spotify.com/authorize')
-    
-    const codeVerifier = generateCodeVerifier()
-    const hashed = await sha256(codeVerifier)
-    const codeChallenge = base64encode(hashed)
-    
-    window.localStorage.setItem('code_verifier', codeVerifier)
-    
-    const params = {
-        response_type: 'code',
-        client_id: clientId,
-        scope,
-        code_challenge_method: 'S256',
-        code_challenge: codeChallenge,
-        redirect_uri: redirectUri
+
+    /* Response:
+
+    {
+        access_token: string,
+        token_type: 'Bearer',
+        scope: string,
+        expires_in: int,
+        refresh_token: string
+
     }
-    
-    authUrl.search = new URLSearchParams(params).toString()
-    window.location.href = authUrl.toString()
+
+    */
+
+    /* Error response:
+
+    {
+        message: 'Invalid access token',
+        status: 401
+    }
+
+    */
+
+    // 401 - Invalid access token
+    // 401 - 
+
+
 }

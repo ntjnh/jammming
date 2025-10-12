@@ -1,12 +1,24 @@
 import { useRef } from 'react'
 import Button from '../Button/Button'
 import styles from './SearchBar.module.css'
+import authentication from '../../modules/authentication'
 
-export default function SearchBar({ accessToken, setResults }) {
+export default function SearchBar({
+    accessToken,
+    getProfile,
+    setResults
+    
+}) {
     const searchRef = useRef(null)
 
     const handleSubmit = async e => {
         e.preventDefault()
+
+        // check for token
+        if (!accessToken) {
+            await authentication()
+            getProfile()
+        }
 
         const query = searchRef.current.value
         const type = 'track'
@@ -21,8 +33,26 @@ export default function SearchBar({ accessToken, setResults }) {
             }
         })
         .then(response => response.json())
-        .then(data => setResults(data))
-        .catch(e => console.error(e))
+        .then(data => {
+            // console.log(`Search request`)
+
+            if (data.error) {
+                const errorStatus = data.error.status
+                const errorMessage = data.error.message
+
+                console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
+
+                if (errorMessage.includes('access token expired')) {
+                    localStorage.setItem('tokenExpired', true)
+                    localStorage.setItem('user_id', '')
+                }
+            }
+
+            // console.log('full response:')
+            // console.log(data)
+            setResults(data)
+        })
+        .catch(e => console.log(e))
     }
 
     return (
