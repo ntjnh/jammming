@@ -61,7 +61,7 @@ export default function SearchBar({
                 <input
                     type="text"
                     ref={searchRef}
-                    placeholder="Enter a song title"
+                    placeholder="Enter a song title, album or artist"
                     required />
 
                 <Button style="search" label="Search" />
