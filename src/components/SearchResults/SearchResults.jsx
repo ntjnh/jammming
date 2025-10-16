@@ -6,7 +6,13 @@ export default function SearchResults({ data, onAdd }) {
         <section className={styles.results}>
             <h2>Results</h2>
 
-            <TrackList onAdd={onAdd} list="results" tracks={data} />
+            {data.length > 0 ? 
+                <TrackList onAdd={onAdd} list="results" tracks={data} /> :
+
+                <h3>
+                    Search results will appear here.
+                </h3>
+            }
         </section>
     )
 }

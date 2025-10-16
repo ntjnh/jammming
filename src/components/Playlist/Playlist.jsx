@@ -10,6 +10,11 @@ export default function Playlist({
     onSave
 }) {
 
+    if (playlistTracks.length > 1) {
+        console.log('playlist:')
+        console.log(playlistTracks.map(track => track.name))
+    }
+
     return (
         <section className={styles.playlist}>
             <form onSubmit={onSave}>
