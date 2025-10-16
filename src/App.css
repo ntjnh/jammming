@@ -109,7 +109,7 @@ main .bg::before {
     }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 768px) {
     .container {
         max-width: 720px;
     }
