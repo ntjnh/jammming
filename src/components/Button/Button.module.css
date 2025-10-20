@@ -3,8 +3,9 @@
     border-radius: .25rem;
     cursor: pointer;
     display: inline-block;
+    font-size: 1rem;
     font-weight: 600;
-    padding: .5rem 2rem;
+    padding: 1rem 3rem;
     text-transform: uppercase;
 }
 
@@ -35,4 +36,11 @@
 .button.search:hover {
     background-color: var(--pelorous-500);
     color: var(--pelorous-950);
+}
+
+@media (min-width: 576px) {
+    .button {
+        font-size: .875rem;
+        padding: .5rem 2rem;
+    }
 }

@@ -1,10 +1,9 @@
 .search {
-    padding: 2rem 0;
+    padding: 2rem 1.5rem;
 }
 
 .search form {
     margin: 0 auto;
-    max-width: 300px;
     text-align: center;
 }
 
@@ -16,7 +15,7 @@
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 1.5rem;
-    padding: .5rem;
+    padding: .75rem;
     text-align: center;
     width: 100%;
 }
@@ -28,4 +27,18 @@
 .search input::placeholder {
     color: var(--pelorous-600);
     opacity: 0.5;
+}
+
+@media (min-width: 576px) {
+    .search {
+        padding: 2rem 0;
+    }
+
+    .search form {
+        max-width: 300px;
+    }
+
+    .search input {
+        padding: .5rem;
+    }
 }

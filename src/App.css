@@ -27,6 +27,7 @@
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -86,13 +87,22 @@ main .bg::before {
 .columns {
     align-items: stretch;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 1.25rem;
+    padding: 0 1.5rem;
     width: 100%;
 }
 
 .column {
     min-height: min-content;
     width: 100%;
+}
+
+@media (min-width: 576px) {
+    .columns {
+        padding: 0;
+    }
 }
 
 @media (min-width: 1024px) {
