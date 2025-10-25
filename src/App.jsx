@@ -8,6 +8,7 @@ import getToken from './modules/getToken'
 import mockResults from './mocks/songs'
 
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
@@ -255,6 +256,8 @@ function App() {
                     </div>
                 </div>
             </main>
+
+            <Footer />
         </>
     )
 }

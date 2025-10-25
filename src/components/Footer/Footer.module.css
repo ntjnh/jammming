@@ -1,0 +1,18 @@
+.footer {
+    color: #fff;
+    font-size: .875rem;
+    padding: 1rem 0;
+    position: relative;
+    text-align: center;
+    z-index: 10;
+}
+
+.footer a,
+.footer a:visited {
+    color: var(--pelorous-500);
+}
+
+.footer a:focus,
+.footer a:hover {
+    color: var(--pelorous-300);
+}
