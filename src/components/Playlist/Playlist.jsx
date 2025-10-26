@@ -16,7 +16,7 @@ export default function Playlist({
     }
 
     return (
-        <section className={styles.playlist}>
+        <section className={styles.playlist} data-testid="playlist">
             <form onSubmit={onSave}>
                 <input
                     onChange={onPlaylistNameChange}

@@ -3,8 +3,8 @@ import styles from './SearchResults.module.css'
 
 export default function SearchResults({ data, onAdd }) {
     return (
-        <section className={styles.results}>
-            <h2>Results</h2>
+        <section className={styles.results} data-testid="search-results">
+            <h2 data-testid="results-heading">Results</h2>
 
             {data.length > 0 ? 
                 <TrackList onAdd={onAdd} list="results" tracks={data} /> :

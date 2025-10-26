@@ -57,7 +57,7 @@ export default function SearchBar({
 
     return (
         <section className={styles.search}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-testid="search">
                 <input
                     type="text"
                     ref={searchRef}
