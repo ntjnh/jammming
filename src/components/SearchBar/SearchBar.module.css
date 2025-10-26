@@ -14,7 +14,7 @@
     display: inline-block;
     font-size: 1rem;
     font-weight: 400;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     padding: .75rem;
     text-align: center;
     width: 100%;
@@ -39,6 +39,7 @@
     }
 
     .search input {
+        margin-bottom: 1.5rem;
         padding: .5rem;
     }
 }

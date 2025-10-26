@@ -27,11 +27,15 @@ export default function Playlist({
                     value={playlistName}
                 />
 
-                <TrackList
-                    list="playlist"
-                    tracks={playlistTracks}
-                    onRemove={onRemove}
-                />
+                {playlistTracks.length > 0 ? (
+                    <TrackList
+                        list="playlist"
+                        tracks={playlistTracks}
+                        onRemove={onRemove}
+                    />
+                ) : (
+                    <h3>Add a track to start building your playlist.</h3>
+                )}
 
                 <Button
                     style="save"

@@ -60,6 +60,7 @@ export default function SearchBar({
             <form onSubmit={handleSubmit} data-testid="search">
                 <input
                     type="text"
+                    name="search"
                     ref={searchRef}
                     placeholder="Enter a song title, album or artist"
                     required />

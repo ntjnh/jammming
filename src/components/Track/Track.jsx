@@ -10,7 +10,7 @@ export default function Track({ trackId, song, artist, album, list, onAdd, onRem
     }
 
     return (
-        <li className={styles.track}>
+        <li className={styles.track} id={trackId}>
             <h3 className={styles.song}>{song}</h3>
             <h4 className={styles.artist}>{artist} <span className={styles.divider}>|</span> {album}</h4>
 

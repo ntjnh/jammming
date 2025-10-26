@@ -24,7 +24,6 @@ function App() {
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
-
     const onAdd = e => {
         const trackId = e.target.id
         const resultsList = results.tracks.items
@@ -43,7 +42,6 @@ function App() {
         setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
         setPlaylistToSave(prev => prev.filter(track => !track.includes(trackId)))
     }
-
 
     useEffect(() => {
         const storedToken = window.localStorage.access_token

@@ -5,7 +5,7 @@
     border-radius: .5rem;
     color: var(--pelorous-50);
     min-height: 100%;
-    padding: 1.125rem 1.5rem;
+    padding: 1.125rem 1.5rem 1.25rem;
 }
 
 .results h2 {
@@ -14,6 +14,6 @@
 }
 
 .result h3 {
-    font-size: 16px;
+    font-size: .875rem;
     font-weight: 400;
 }

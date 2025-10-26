@@ -51,10 +51,6 @@ input {
     font-family: var(--fontface);
 }
 
-main {
-    padding-bottom: 5rem;
-}
-
 main .bg {
     background: url('./assets/background.jpg') no-repeat 50% 75%;
     background-size: cover;
@@ -105,7 +101,17 @@ main .bg::before {
     }
 }
 
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
 @media (min-width: 1024px) {
+    main {
+        padding-bottom: 1.5rem;
+    }
+
     .container {
         max-width: 960px;
     }
@@ -116,11 +122,5 @@ main .bg::before {
 
     .column--right {
         width: 42%;
-    }
-}
-
-@media (min-width: 768px) {
-    .container {
-        max-width: 720px;
     }
 }

@@ -31,3 +31,8 @@
 .playlist input:focus-within {
     outline-color: var(--pelorous-400);
 }
+
+.playlist h3 {
+    font-size: .875rem;
+    font-weight: 400;
+}

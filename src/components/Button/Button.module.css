@@ -20,7 +20,7 @@
 .button.save {
     background-color: var(--pelorous-500);
     color: var(--pelorous-950);
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
 }
 
 .button.save:hover {
@@ -38,9 +38,19 @@
     color: var(--pelorous-950);
 }
 
+@media (max-width: 575px) {
+    .button {
+        width: 100%;
+    }
+}
+
 @media (min-width: 576px) {
     .button {
         font-size: .875rem;
         padding: .5rem 2rem;
+    }
+
+    .button.save {
+        margin-top: 1.5rem;
     }
 }
