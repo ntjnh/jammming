@@ -3,6 +3,8 @@ import styles from './TrackList.module.css'
 
 export default function TrackList({ tracks, list, onAdd, onRemove }) {
     const tracksList = tracks.map((track, idx) => {
+        const trackTestId = track.name.toLowerCase().replaceAll(' ', '-')
+
         return (
             <Track
                 key={idx}
@@ -13,6 +15,7 @@ export default function TrackList({ tracks, list, onAdd, onRemove }) {
                 list={list}
                 onAdd={onAdd}
                 onRemove={onRemove}
+                testid={`${list}-${trackTestId}`}
             />
         )
     })
