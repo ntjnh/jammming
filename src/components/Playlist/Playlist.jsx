@@ -27,17 +27,18 @@ export default function Playlist({
                     value={playlistName}
                 />
 
-                {playlistTracks.length > 0 ? (
+                {playlistTracks.length ? (
                     <TrackList
                         list="playlist"
                         tracks={playlistTracks}
                         onRemove={onRemove}
                     />
                 ) : (
-                    <h3>Add a track to start building your playlist.</h3>
+                    <h3 className={styles.placeholder}>Add a track to start building your playlist.</h3>
                 )}
 
                 <Button
+                    isActive={playlistTracks.length > 0}
                     style="save"
                     label="Save to Spotify"
                 />

@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
       browser: {
         provider: 'playwright',
         enabled: true,
-        headless: false,
+        headless: true,
         instances: [
           {
             browser: 'chromium'

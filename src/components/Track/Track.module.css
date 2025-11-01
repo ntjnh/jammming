@@ -1,5 +1,6 @@
 .track {
     border-top: 1px solid var(--pelorous-600);
+    overflow: hidden;
     padding: .75rem 0;
     position: relative;
     text-align: left;
@@ -23,7 +24,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     line-height: 1;
-    padding: 1rem 0 1rem 2rem;
+    padding: 1rem 0 1rem 100%;
     position: absolute;
     right: 0;
     top: 7px;

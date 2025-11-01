@@ -5,7 +5,7 @@
     border-radius: .5rem;
     color: var(--pelorous-50);
     min-height: 100%;
-    padding: 1.125rem 1.5rem;
+    padding: 1.5rem;
     text-align: center;
 }
 
@@ -32,7 +32,21 @@
     outline-color: var(--pelorous-400);
 }
 
-.playlist h3 {
+.playlist .placeholder {
     font-size: .875rem;
     font-weight: 400;
+}
+
+.playlist ul li:first-child {
+    border-top: none;
+}
+
+.playlist ul li:last-child {
+    border-bottom: 1px solid var(--pelorous-500);
+}
+
+@media (min-width: 1024px) {
+    .results {
+        padding: 1.125rem 1.5rem;
+    }
 }

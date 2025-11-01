@@ -7,13 +7,14 @@
     font-weight: 600;
     padding: 1rem 3rem;
     text-transform: uppercase;
+    transition: all .15s linear;
 }
 
 .button.save.disabled,
 .button.save.disabled:hover {
-    color: var(--pelorous-950);
-    cursor: default;
-    background-color: grey;
+    color: var(--pelorous-800);
+    cursor: not-allowed;
+    background-color: var(--pelorous-200);
     opacity: 0.3;
 }
 
@@ -51,6 +52,6 @@
     }
 
     .button.save {
-        margin-top: 1.5rem;
+        margin-top: 2rem;
     }
 }
