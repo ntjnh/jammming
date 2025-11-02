@@ -15,6 +15,7 @@ import Playlist from './components/Playlist/Playlist'
 
 function App() {
     const [results, setResults] = useState(mockResults)
+    const [loading, setLoading] = useState(false)
     const [playlistName, setPlaylistName] = useState('New Playlist 1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [accessToken, setAccessToken] = useState('')
@@ -229,6 +230,7 @@ function App() {
                     <SearchBar
                         accessToken={accessToken}
                         getProfile={getProfile}
+                        setLoading={setLoading}
                         setValidateAccessToken={setValidateAccessToken}
                         setResults={setResults}
                         validateAccessToken={validateAccessToken} />
@@ -237,6 +239,7 @@ function App() {
                         <div className="column column--left">
                             <SearchResults
                                 data={results.tracks.items}
+                                loading={loading}
                                 onAdd={onAdd}
                                 setPlaylistTracks={setPlaylistTracks} />
                         </div>
