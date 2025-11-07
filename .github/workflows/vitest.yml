@@ -2,12 +2,12 @@ name: Tests
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - Bug/*
-    - Feature/*
-    - Test/*
+      - 'Bug/*'
+      - 'Feature/*'
+      - 'Test/*'
 jobs:
   test:
     runs-on: ubuntu-latest
