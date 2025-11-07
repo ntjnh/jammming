@@ -6,13 +6,15 @@ import authentication from '../../modules/authentication'
 export default function SearchBar({
     accessToken,
     getProfile,
+    setSearching,
     setResults
-    
 }) {
     const searchRef = useRef(null)
 
     const handleSubmit = async e => {
         e.preventDefault()
+
+        setSearching(prev => !prev)
 
         // check for token
         if (!accessToken) {
@@ -51,6 +53,7 @@ export default function SearchBar({
             // console.log('full response:')
             // console.log(data)
             setResults(data)
+            setSearching(prev => !prev)
         })
         .catch(e => console.log(e))
     }
@@ -65,7 +68,7 @@ export default function SearchBar({
                     placeholder="Enter a song title, album or artist"
                     required />
 
-                <Button style="search" label="Search" />
+                <Button isActive={true} style="search" label="Search" />
             </form>
         </section>
     )

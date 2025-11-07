@@ -15,6 +15,9 @@ import Playlist from './components/Playlist/Playlist'
 
 function App() {
     const [results, setResults] = useState(mockResults)
+    const [searching, setSearching] = useState(false)
+    const [saving, setSaving] = useState(false)
+    const [saved, setSaved] = useState(false)
     const [playlistName, setPlaylistName] = useState('New Playlist 1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [accessToken, setAccessToken] = useState('')
@@ -51,7 +54,9 @@ function App() {
                 const generateToken = async () => await getToken(setAccessToken)
                 generateToken()
             }
-        } else if (storedToken && storedToken.length > 50) {
+        }
+        
+        if (storedToken && storedToken.length > 50) {
             setAccessToken(storedToken)
         }
         
@@ -103,6 +108,8 @@ function App() {
 
     const onSave = async e => {
         e.preventDefault()
+
+        setSaving(true)
 
         // If already authorised
         if (authorise()) {
@@ -203,6 +210,8 @@ function App() {
                             setPlaylistName('')
                             setPlaylistToSave([])
                             setPlaylistTracks([])
+                            setSaved(true)
+                            setSaving(false)
                             console.log(data)
                         }
                     })
@@ -229,6 +238,7 @@ function App() {
                     <SearchBar
                         accessToken={accessToken}
                         getProfile={getProfile}
+                        setSearching={setSearching}
                         setValidateAccessToken={setValidateAccessToken}
                         setResults={setResults}
                         validateAccessToken={validateAccessToken} />
@@ -237,18 +247,21 @@ function App() {
                         <div className="column column--left">
                             <SearchResults
                                 data={results.tracks.items}
+                                searching={searching}
                                 onAdd={onAdd}
                                 setPlaylistTracks={setPlaylistTracks} />
                         </div>
 
                         <div className="column column--right">
                             <Playlist
-                                playlistName={playlistName}
-                                playlistTracks={playlistTracks}
-                                setPlaylistTracks={setPlaylistTracks}
                                 onPlaylistNameChange={onPlaylistNameChange}
                                 onSave={onSave}
                                 onRemove={onRemove}
+                                playlistName={playlistName}
+                                playlistTracks={playlistTracks}
+                                saved={saved}
+                                saving={saving}
+                                setPlaylistTracks={setPlaylistTracks}
                             />
                         </div>
                     </div>

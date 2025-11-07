@@ -95,6 +95,22 @@ main .bg::before {
     width: 100%;
 }
 
+.spinner {
+    animation: spin 1s linear infinite;
+    display: block;
+    margin: 0 auto;
+    width: 2.5rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 @media (min-width: 576px) {
     .columns {
         padding: 0;
