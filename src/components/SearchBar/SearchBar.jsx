@@ -6,7 +6,7 @@ import authentication from '../../modules/authentication'
 export default function SearchBar({
     accessToken,
     getProfile,
-    setLoading,
+    setSearching,
     setResults
 }) {
     const searchRef = useRef(null)
@@ -14,7 +14,7 @@ export default function SearchBar({
     const handleSubmit = async e => {
         e.preventDefault()
 
-        setLoading(prev => !prev)
+        setSearching(prev => !prev)
 
         // check for token
         if (!accessToken) {
@@ -53,7 +53,7 @@ export default function SearchBar({
             // console.log('full response:')
             // console.log(data)
             setResults(data)
-            setLoading(prev => !prev)
+            setSearching(prev => !prev)
         })
         .catch(e => console.log(e))
     }
