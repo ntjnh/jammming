@@ -43,8 +43,8 @@ You will use your knowledge of React components, passing state and requests with
 - [x] [Obtain a Spotify Access Token](#obtain-a-spotify-access-token)
 - [x] [Implement Spotify Search Request](#implement-spotify-search-request)
 - [x] [Save a User's Playlist](#save-a-users-playlist)
-- [ ] [Testing and Debugging](#testing-and-debugging)
-- [ ] [Review Your Project](#review-your-project)
+- [x] [Testing and Debugging](#testing-and-debugging)
+- [x] [Review Your Project](#review-your-project)
 
 ### Set Up Your Local Environment
 
