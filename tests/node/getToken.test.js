@@ -8,7 +8,7 @@ afterAll(() => server.close())
 
 describe('Get access token', () => {
     const endpoint = `https://accounts.spotify.com/api/token`
-    const clientId = import.meta.env.VITE_CLIENT_ID
+    const clientId = 'TEST_client_id'
     const redirectUri = 'http://localhost:5173/callback'
     const grantType = 'authorization_code'
     const code = 'TEST_code'
