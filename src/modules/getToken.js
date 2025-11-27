@@ -1,6 +1,8 @@
 const getToken = async setAccessToken => {
+    const { localStorage, location } = window
+
     // We must parse the URL to retrieve the code parameter
-    const urlParams = new URLSearchParams(window.location.search)
+    const urlParams = new URLSearchParams(location.search)
     let code = urlParams.get('code')
 
     const clientId = import.meta.env.VITE_CLIENT_ID

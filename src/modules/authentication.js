@@ -13,8 +13,10 @@ export default async function authentication() {
     const codeVerifier = generateCodeVerifier()
     const hashed = await sha256(codeVerifier)
     const codeChallenge = base64encode(hashed)
+
+    const { localStorage, location } = window
     
-    window.localStorage.setItem('code_verifier', codeVerifier)
+    localStorage.setItem('code_verifier', codeVerifier)
     
     const params = {
         response_type: 'code',
@@ -26,5 +28,5 @@ export default async function authentication() {
     }
     
     authUrl.search = new URLSearchParams(params).toString()
-    window.location.href = authUrl.toString()
+    location.href = authUrl.toString()
 }
