@@ -1,6 +1,6 @@
 import { render } from 'vitest-browser-react'
 import { describe, expect, test } from 'vitest'
-import App from '../App'
+import App from '../../../src/App'
 
 describe('Application renders', async () => {
 

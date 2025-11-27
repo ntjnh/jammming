@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test:browser": "vitest -c vitest.config.browser.js",
+    "test:node": "vitest -c vitest.config.node.js",
+    "test": "npm run test:node && npm run test:browser"
   },
   "dependencies": {
     "react": "^18.3.1",
