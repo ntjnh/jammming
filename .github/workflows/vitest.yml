@@ -15,6 +15,7 @@ jobs:
       matrix:
         node-version: [25.x]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./actions/setup-env
         with:
             node-version: ${{ matrix.node-version }}
@@ -37,6 +38,7 @@ jobs:
       matrix:
         node-version: [25.x]
     steps:
+      - uses: actions/checkout@v4
       - uses: ./actions/setup-env
         with:
             node-version: ${{ matrix.node-version }}
