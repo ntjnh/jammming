@@ -1,5 +1,6 @@
 const getRefreshToken = async setAccessToken => {
     const clientId = import.meta.env.VITE_CLIENT_ID
+    const { localStorage } = window
 
    // refresh token that has been previously stored
    const refreshToken = localStorage.getItem('refresh_token')

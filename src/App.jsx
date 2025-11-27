@@ -5,7 +5,7 @@ import authentication from './modules/authentication'
 import getRefreshToken from './modules/getRefreshToken'
 import getToken from './modules/getToken'
 
-import mockResults from './mocks/songs'
+import mockResults from '../tests/mocks/songs'
 
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'

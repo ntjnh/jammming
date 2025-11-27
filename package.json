@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test:browser": "vitest -c vitest.config.browser.js",
+    "test:node": "vitest -c vitest.config.node.js",
+    "test": "npm run test:node && npm run test:browser"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -25,6 +27,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "msw": "^2.12.3",
     "playwright": "^1.56.1",
     "vite": "^6.4.1",
     "vitest": "^3.2.4",

@@ -1,34 +1,46 @@
 name: Tests
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
     branches:
       - 'Bug/*'
       - 'Feature/*'
       - 'Test/*'
+
 jobs:
-  test:
+  browser_tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [25.x]
     steps:
-      - uses: actions/checkout@v4
-      - run: echo Setting up Node.js...
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - uses: ./.github/actions/setup-env
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: echo Installing npm packages...
-      - run: npm ci
+            node-version: ${{ matrix.node-version }}
+
       - run: echo Installing Playwright browsers...
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - run: echo Building the app...
       - name: Build the React app
         run: npm run build --if-present
-      - run: echo Running the tests...
-      - name: Run the Vitest tests
-        run: npm test
+
+      - run: echo Running the browser tests...
+      - name: Run the browser tests
+        run: npm run test:browser
+
+  node_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [25.x]
+    steps:
+      - uses: ./.github/actions/setup-env
+        with:
+            node-version: ${{ matrix.node-version }}
+
+      - run: echo Running the node tests...
+      - name: Run the node tests
+        run: npm run test:node

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+
+name: "Shared project setup"
+description: "Checkout, setup Node, install deps"
+
+inputs:
+  node-version:
+    description: Node.js version to install
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+
+    - run: echo Setting up Node.js...
+      shell: bash
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - run: echo Installing npm packages...
+      shell: bash
+
+    - run: npm ci
+      shell: bash
