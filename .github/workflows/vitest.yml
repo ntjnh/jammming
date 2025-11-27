@@ -15,7 +15,7 @@ jobs:
       matrix:
         node-version: [25.x]
     steps:
-      - uses: ./.github/actions/setup-env
+      - uses: ./actions/setup-env
         with:
             node-version: ${{ matrix.node-version }}
 
@@ -37,7 +37,7 @@ jobs:
       matrix:
         node-version: [25.x]
     steps:
-      - uses: ./.github/actions/setup-env
+      - uses: ./actions/setup-env
         with:
             node-version: ${{ matrix.node-version }}
 
