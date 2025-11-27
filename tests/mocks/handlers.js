@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import tracks from './songs'
+import { expect } from 'vitest'
 
 let lastTokenRequestBody = null
 
@@ -18,7 +19,49 @@ export const handlers = [
             refresh_token: 'TEST_refresh_token',
             scope: 'playlist-modify-private playlist-modify-public'
         })
-    })
+    }),
+    http.post(
+        `https://api.spotify.com/v1/users/:userId/playlists`,
+        async ({ request, params }) => {
+            const { userId } = params
+
+            const data = await request.json()
+
+            expect(data).toEqual({
+                name: expect.any(String),
+                description: expect.any(String),
+                public: false
+            })
+
+            return HttpResponse.json({
+                id: 'NEW_PLAYLIST_ID',
+                name: data.name,
+                description: data.description,
+                public: false,
+                owner: {
+                    id: userId
+                }
+            })
+        }
+    ),
+    http.post(
+        `https://api.spotify.com/v1/playlists/:playlistId/tracks`,
+        async ({ request }) => {
+            const data = await request.json()
+
+            expect(data).toEqual({
+                uris: [
+                    'spotify:track:abc123def',
+                    'spotify:track:123abc456',
+                    'spotify:track:def789ghi'
+                ]
+            })
+
+            return HttpResponse.json({
+                snapshot_id: 'TEST_snapshot_id'
+            })
+        }
+    )
 ]
 
 export { lastTokenRequestBody }
