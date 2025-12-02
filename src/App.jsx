@@ -13,6 +13,7 @@ import Footer from './components/Footer/Footer'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
+import removeTrack from './features/playlist/removeTrack'
 
 function App() {
     const [results, setResults] = useState(mockResults)
@@ -35,11 +36,11 @@ function App() {
         setPlaylistToSave(updated.playlistUris)
     }
 
-    const onRemove = e => {
-        const trackId = e.target.id
+    const handleRemoveTrack = e => {
+        const updated = removeTrack(e.target.id, playlistTracks, playlistToSave)
 
-        setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
-        setPlaylistToSave(prev => prev.filter(track => !track.includes(trackId)))
+        setPlaylistTracks(updated.playlistTracks)
+        setPlaylistToSave(updated.playlistUris)
     }
 
     useEffect(() => {
@@ -252,7 +253,7 @@ function App() {
                             <Playlist
                                 onPlaylistNameChange={onPlaylistNameChange}
                                 onSave={onSave}
-                                onRemove={onRemove}
+                                onRemove={handleRemoveTrack}
                                 playlistName={playlistName}
                                 playlistTracks={playlistTracks}
                                 saved={saved}
