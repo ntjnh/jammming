@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-import authentication from './modules/authentication'
-import getRefreshToken from './modules/getRefreshToken'
-import getToken from './modules/getToken'
+import authentication from './features/auth/authentication'
+import getRefreshToken from './features/auth/getRefreshToken'
+import getToken from './features/auth/getToken'
+import addTrack from './features/playlist/addTrack'
 
 import mockResults from '../tests/mocks/songs'
 
@@ -27,16 +28,11 @@ function App() {
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
-    const onAdd = e => {
-        const trackId = e.target.id
-        const resultsList = results.tracks.items
-        const trackToAdd = resultsList.filter(track => track.id === trackId)[0]
+    const handleAddTrack = e => {
+        const updated = addTrack(e.target.id, results, playlistTracks, playlistToSave)
 
-        setPlaylistTracks([...playlistTracks, trackToAdd])
-        setPlaylistToSave([...playlistToSave, trackToAdd.uri])
-
-        console.log('playlist uris:')
-        console.log(playlistToSave)
+        setPlaylistTracks(updated.playlistTracks)
+        setPlaylistToSave(updated.playlistUris)
     }
 
     const onRemove = e => {
@@ -248,7 +244,7 @@ function App() {
                             <SearchResults
                                 data={results.tracks.items}
                                 searching={searching}
-                                onAdd={onAdd}
+                                onAdd={handleAddTrack}
                                 setPlaylistTracks={setPlaylistTracks} />
                         </div>
 
