@@ -3,10 +3,10 @@ const getToken = async setAccessToken => {
 
     // We must parse the URL to retrieve the code parameter
     const urlParams = new URLSearchParams(location.search)
-    let code = urlParams.get('code')
+    const code = urlParams.get('code')
 
     const clientId = import.meta.env.VITE_CLIENT_ID
-    const redirectUri = 'http://localhost:5173/callback'
+    const redirectUri = 'http://127.0.0.1:5173/callback'
     const codeVerifier = localStorage.getItem('code_verifier')
 
     const url = 'https://accounts.spotify.com/api/token'

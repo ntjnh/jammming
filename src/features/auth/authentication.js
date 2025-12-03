@@ -5,7 +5,7 @@ import { base64encode, generateCodeVerifier, sha256 } from './codeChallenge'
 
 export default async function authentication() {
     const clientId = import.meta.env.VITE_CLIENT_ID
-    const redirectUri = 'http://localhost:5173/callback'
+    const redirectUri = 'http://127.0.0.1:5173/callback'
     
     const scope = 'playlist-modify-private playlist-modify-public'
     const authUrl = new URL('https://accounts.spotify.com/authorize')

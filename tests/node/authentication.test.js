@@ -69,7 +69,7 @@ describe('authentication()', () => {
 
         const url = new URL(window.location.href)
         expect(url.origin + url.pathname).toBe('https://accounts.spotify.com/authorize')
-        expect(url.searchParams.get('redirect_uri')).toBe('http://localhost:5173/callback')
+        expect(url.searchParams.get('redirect_uri')).toBe('http://127.0.0.1:5173/callback')
         expect(url.searchParams.get('code_challenge')).toBe('MOCKED_CODE_CHALLENGE')
         expect(url.searchParams.get('response_type')).toBe('code')
         expect(url.searchParams.get('client_id')).toBeDefined()
