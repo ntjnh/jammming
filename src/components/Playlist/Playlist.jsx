@@ -13,11 +13,6 @@ export default function Playlist({
     onSave
 }) {
 
-    if (playlistTracks.length > 1) {
-        console.log('playlist:')
-        console.log(playlistTracks.map(track => track.name))
-    }
-
     return (
         <section className={styles.playlist} data-testid="playlist">
             <form onSubmit={onSave}>
@@ -59,5 +54,4 @@ export default function Playlist({
             </form>
         </section>
     )
-
 }

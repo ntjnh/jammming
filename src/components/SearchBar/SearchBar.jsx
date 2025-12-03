@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import Button from '../Button/Button'
 import styles from './SearchBar.module.css'
-import authentication from '../../modules/authentication'
+import authentication from '../../features/auth/authentication'
+import getProfile from '../../features/user/getProfile'
 
 export default function SearchBar({
     accessToken,
-    getProfile,
     setSearching,
     setResults
 }) {
@@ -16,10 +16,12 @@ export default function SearchBar({
 
         setSearching(prev => !prev)
 
-        // check for token
+        // check for token first
         if (!accessToken) {
             await authentication()
-            getProfile()
+            getProfile(accessToken)
+        } else {
+            getProfile(accessToken)
         }
 
         const query = searchRef.current.value
@@ -34,22 +36,14 @@ export default function SearchBar({
                 Authorization: 'Bearer ' + accessToken
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            // console.log(`Search request`)
-
-            if (data.error) {
-                const errorStatus = data.error.status
-                const errorMessage = data.error.message
-
-                console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
-
-                if (errorMessage.includes('access token expired')) {
-                    localStorage.setItem('tokenExpired', true)
-                    localStorage.setItem('user_id', '')
-                }
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP Error. Status: ${res.status} - ${res.message}`)
             }
 
+            return res.json()
+        })
+        .then(data => {
             // console.log('full response:')
             // console.log(data)
             setResults(data)
@@ -57,6 +51,17 @@ export default function SearchBar({
         })
         .catch(e => console.log(e))
     }
+
+    // const handleSearch = e => {
+    //     e.preventDefault()
+    //     const query = searchRef.current.value.toLowerCase()
+
+    //     setResults(prev => {
+    //         prev.tracks.items = prev.tracks.items
+    //             .filter(t => t.name.toLowerCase().includes(query))
+    //         return prev
+    //     })
+    // }
 
     return (
         <section className={styles.search}>
