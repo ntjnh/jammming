@@ -24,7 +24,7 @@ const createPlaylist = async (userId, playlistName, accessToken) => {
             const errorMessage = data.error.message
 
             if (errorMessage.includes('access token expired')) {
-                localStorage.setItem('tokenExpired', true)
+                localStorage.setItem('token_expired', true)
                 localStorage.setItem('user_id', '')
             }
 

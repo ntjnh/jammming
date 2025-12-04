@@ -5,11 +5,7 @@ import authentication from '../../features/auth/authentication'
 import getProfile from '../../features/user/getProfile'
 import searchTracks from '../../features/search/searchTracks'
 
-export default function SearchBar({
-    accessToken,
-    setSearching,
-    setResults
-}) {
+export default function SearchBar({ accessToken, setSearching, setResults }) {
     const searchRef = useRef(null)
 
     const handleSubmit = async e => {

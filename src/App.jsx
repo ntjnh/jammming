@@ -24,23 +24,22 @@ function App() {
     const [playlistName, setPlaylistName] = useState('New Playlist 1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [accessToken, setAccessToken] = useState('')
-    const [validateAccessToken, setValidateAccessToken] = useState('')
-    const [playlistToSave, setPlaylistToSave] = useState([])
+    const [playlistUris, setPlaylistUris] = useState([])
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
     const handleAddTrack = e => {
-        const updated = addTrack(e.target.id, results, playlistTracks, playlistToSave)
+        const updated = addTrack(e.target.id, results, playlistTracks, playlistUris)
 
         setPlaylistTracks(updated.playlistTracks)
-        setPlaylistToSave(updated.playlistUris)
+        setPlaylistUris(updated.playlistUris)
     }
 
     const handleRemoveTrack = e => {
-        const updated = removeTrack(e.target.id, playlistTracks, playlistToSave)
+        const updated = removeTrack(e.target.id, playlistTracks, playlistUris)
 
         setPlaylistTracks(updated.playlistTracks)
-        setPlaylistToSave(updated.playlistUris)
+        setPlaylistUris(updated.playlistUris)
     }
 
     useEffect(() => {
@@ -48,8 +47,8 @@ function App() {
 
         if (window.location.pathname === '/callback') {
             if (!storedToken || storedToken.length < 50) {
-                const generateToken = async () => await getToken(setAccessToken)
-                generateToken()
+                const generateToken = async () => await getToken()
+                setAccessToken(generateToken)
             }
         }
         
@@ -57,7 +56,7 @@ function App() {
             setAccessToken(storedToken)
         }
         
-        if (localStorage.getItem('tokenExpired') === 'true') {
+        if (localStorage.getItem('token_expired') === 'true') {
             const refreshToken = async () => await getRefreshToken(setAccessToken)
             refreshToken()
         }
@@ -70,10 +69,10 @@ function App() {
         try {
             const userId = localStorage.getItem('user_id')
             const playlistId = await createPlaylist(userId, playlistName, accessToken)
-            await savePlaylist(playlistId, playlistToSave, accessToken)
+            await savePlaylist(playlistId, playlistUris, accessToken)
 
             setPlaylistName('')
-            setPlaylistToSave([])
+            setPlaylistUris([])
             setPlaylistTracks([])
             setSaved(true)
             setSaving(false)
@@ -92,9 +91,7 @@ function App() {
                     <SearchBar
                         accessToken={accessToken}
                         setSearching={setSearching}
-                        setValidateAccessToken={setValidateAccessToken}
-                        setResults={setResults}
-                        validateAccessToken={validateAccessToken} />
+                        setResults={setResults} />
 
                     <div className="columns">
                         <div className="column column--left">

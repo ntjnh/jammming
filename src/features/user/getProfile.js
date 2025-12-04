@@ -1,5 +1,5 @@
 const getProfile = async accessToken => {
-    await fetch('https://api.spotify.com/v1/me', {
+    return await fetch('https://api.spotify.com/v1/me', {
         headers: {
             Authorization: 'Bearer ' + accessToken
         }
