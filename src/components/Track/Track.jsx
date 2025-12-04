@@ -11,11 +11,7 @@ export default function Track({
     testid
 }) {
     const handleClick = e => {
-        if (list === 'results') {
-            onAdd(e)
-        } else {
-            onRemove(e)
-        }
+        list === 'results' ? onAdd(e) : onRemove(e)
     }
 
     return (

@@ -1,14 +1,11 @@
 import { useRef } from 'react'
 import Button from '../Button/Button'
 import styles from './SearchBar.module.css'
-import authentication from '../../modules/authentication'
+import authentication from '../../features/auth/authentication'
+import getProfile from '../../features/user/getProfile'
+import searchTracks from '../../features/search/searchTracks'
 
-export default function SearchBar({
-    accessToken,
-    getProfile,
-    setSearching,
-    setResults
-}) {
+export default function SearchBar({ accessToken, setSearching, setResults }) {
     const searchRef = useRef(null)
 
     const handleSubmit = async e => {
@@ -16,47 +13,32 @@ export default function SearchBar({
 
         setSearching(prev => !prev)
 
-        // check for token
+        // check for token first
         if (!accessToken) {
             await authentication()
-            getProfile()
+            getProfile(accessToken)
+        } else {
+            getProfile(accessToken)
         }
 
         const query = searchRef.current.value
-        const type = 'track'
-        const market = 'GB'
-        const limit = 10
-        let endpoint = 'https://api.spotify.com/v1/search'
-        endpoint += `?q=${query}&type=${type}&market=${market}&limit=${limit}`
+        const tracks = await searchTracks(query, accessToken)
 
-        await fetch(endpoint, {
-            headers: {
-                Authorization: 'Bearer ' + accessToken
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // console.log(`Search request`)
-
-            if (data.error) {
-                const errorStatus = data.error.status
-                const errorMessage = data.error.message
-
-                console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
-
-                if (errorMessage.includes('access token expired')) {
-                    localStorage.setItem('tokenExpired', true)
-                    localStorage.setItem('user_id', '')
-                }
-            }
-
-            // console.log('full response:')
-            // console.log(data)
-            setResults(data)
-            setSearching(prev => !prev)
-        })
-        .catch(e => console.log(e))
+        setResults(tracks)
+        setSearching(prev => !prev)
     }
+
+    // // test search handler
+    // const handleSearch = e => {
+    //     e.preventDefault()
+    //     const query = searchRef.current.value.toLowerCase()
+
+    //     setResults(prev => {
+    //         prev.tracks.items = prev.tracks.items
+    //             .filter(t => t.name.toLowerCase().includes(query))
+    //         return prev
+    //     })
+    // }
 
     return (
         <section className={styles.search}>

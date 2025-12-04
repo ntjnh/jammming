@@ -21,9 +21,10 @@ const getRefreshToken = async setAccessToken => {
     const response = await body.json()
 
     localStorage.setItem('access_token', response.access_token)
+
     if (response.refresh_token) {
         localStorage.setItem('refresh_token', response.refresh_token)
-        localStorage.setItem('tokenExpired', false)
+        localStorage.setItem('token_expired', false)
         setAccessToken(response.access_token)
     }
 }

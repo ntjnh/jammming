@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-import authentication from './modules/authentication'
-import getRefreshToken from './modules/getRefreshToken'
-import getToken from './modules/getToken'
+import getRefreshToken from './features/auth/getRefreshToken'
+import getToken from './features/auth/getToken'
+import addTrack from './features/playlist/addTrack'
 
 import mockResults from '../tests/mocks/songs'
 
@@ -12,6 +12,9 @@ import Footer from './components/Footer/Footer'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
+import removeTrack from './features/playlist/removeTrack'
+import createPlaylist from './features/playlist/createPlaylist'
+import savePlaylist from './features/playlist/savePlaylist'
 
 function App() {
     const [results, setResults] = useState(mockResults)
@@ -21,29 +24,22 @@ function App() {
     const [playlistName, setPlaylistName] = useState('New Playlist 1')
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [accessToken, setAccessToken] = useState('')
-    const [validateAccessToken, setValidateAccessToken] = useState('')
-    const [playlistToSave, setPlaylistToSave] = useState([])
-    const [playlistSaved, setPlaylistSaved] = useState(false)
+    const [playlistUris, setPlaylistUris] = useState([])
 
     const onPlaylistNameChange = e => setPlaylistName(e.target.value)
 
-    const onAdd = e => {
-        const trackId = e.target.id
-        const resultsList = results.tracks.items
-        const trackToAdd = resultsList.filter(track => track.id === trackId)[0]
+    const handleAddTrack = e => {
+        const updated = addTrack(e.target.id, results, playlistTracks, playlistUris)
 
-        setPlaylistTracks([...playlistTracks, trackToAdd])
-        setPlaylistToSave([...playlistToSave, trackToAdd.uri])
-
-        console.log('playlist uris:')
-        console.log(playlistToSave)
+        setPlaylistTracks(updated.playlistTracks)
+        setPlaylistUris(updated.playlistUris)
     }
 
-    const onRemove = e => {
-        const trackId = e.target.id
+    const handleRemoveTrack = e => {
+        const updated = removeTrack(e.target.id, playlistTracks, playlistUris)
 
-        setPlaylistTracks(prev => prev.filter(track => track.id !== trackId))
-        setPlaylistToSave(prev => prev.filter(track => !track.includes(trackId)))
+        setPlaylistTracks(updated.playlistTracks)
+        setPlaylistUris(updated.playlistUris)
     }
 
     useEffect(() => {
@@ -51,8 +47,8 @@ function App() {
 
         if (window.location.pathname === '/callback') {
             if (!storedToken || storedToken.length < 50) {
-                const generateToken = async () => await getToken(setAccessToken)
-                generateToken()
+                const generateToken = async () => await getToken()
+                setAccessToken(generateToken)
             }
         }
         
@@ -60,172 +56,29 @@ function App() {
             setAccessToken(storedToken)
         }
         
-        if (localStorage.getItem('tokenExpired') === 'true') {
+        if (localStorage.getItem('token_expired') === 'true') {
             const refreshToken = async () => await getRefreshToken(setAccessToken)
             refreshToken()
         }
-    }, [])
+    }, [])    
 
-    const authorise = async () => {
-        if (accessToken) {
-            getProfile()
-        } else if (!accessToken) {
-            await authentication()
-            getProfile()
-        }
-        return true
-        // refresh token?
-    }
-
-    // TODO: Delete this
-    async function getProfile() {
-        await fetch('https://api.spotify.com/v1/me', {
-            headers: {
-                Authorization: 'Bearer ' + accessToken
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.error) {
-                const errorStatus = data.error.status
-                const errorMessage = data.error.message
-
-                console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
-
-                if (errorMessage.includes('access token expired')) {
-                    setValidateAccessToken(errorStatus)
-                    localStorage.setItem('tokenExpired', true)
-                    localStorage.setItem('user_id', '')
-                }
-            } else {
-                // console.log('profile info:')
-                // console.log(data)
-                localStorage.setItem('user_id', data.id)
-            }
-        })
-        .catch(e => console.error(e))
-    }
-
-    const onSave = async e => {
+    const handleSavePlaylist = async e => {
         e.preventDefault()
-
         setSaving(true)
 
-        // If already authorised
-        if (authorise()) {
-            const createPlaylist = async () => {
-                try {
-                    const createPlaylistEndpoint = `https://api.spotify.com/v1/users/${localStorage.getItem('user_id')}/playlists`
-    
-                    await fetch(createPlaylistEndpoint, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            name: playlistName,
-                            description: `${playlistName} playlist (Created by Jammming)`,
-                            public: false
-                        }),
-                        headers: {
-                            Authorization: 'Bearer ' + accessToken,
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(res => {
-                        // if (!res.ok) {
-                        //     console.log(`Create playlist request (error):`)
-                        //     console.log(res)
-                        //     throw new Error(`HTTP error! Status: ${res.status}`);
-                        // }
-                        console.log(`Create playlist request...`)
-                        return res.json()
-                    })
-                    .then(async data => {
-                        if (data.error) {
-                            const errorStatus = data.error.status
-                            const errorMessage = data.error.message
+        try {
+            const userId = localStorage.getItem('user_id')
+            const playlistId = await createPlaylist(userId, playlistName, accessToken)
+            await savePlaylist(playlistId, playlistUris, accessToken)
 
-                            console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
-
-                            if (errorMessage.includes('access token expired')) {
-                                setValidateAccessToken(errorStatus)
-                                localStorage.setItem('tokenExpired', true)
-                                localStorage.setItem('user_id', '')
-                            }
-                        } else {
-                            console.log(`Playlist created!`)
-                            // setPlaylistId(data.id) // save in localStorage
-                            localStorage.setItem('playlist_id', data.id)
-
-                            await savePlaylist(localStorage.getItem('playlist_id'))
-                        }
-                    })
-                } catch (e) {
-                    console.error(`Error: ${e}`)
-                }
-            }
-
-            const savePlaylist = async id => {
-                // setPlaylistToSave(playlistTracks.map(track => track.uri))
-                console.log('playlist to save')
-                console.log(playlistToSave)
-    
-                const addToPlaylistEndpoint = `https://api.spotify.com/v1/playlists/${id}/tracks`
-
-                try {
-                    await fetch(addToPlaylistEndpoint, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            uris: playlistToSave
-                        }),
-                        headers: {
-                            Authorization: 'Bearer ' + accessToken,
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(res => {
-                        console.log(`Save playlist request...`)
-                        // if (!res.ok) {
-                        //     console.log(res)
-                        //     throw new Error(`HTTP Error: Status ${res.status}`);
-                        // }
-                        
-                        return res.json()
-                    })
-                    .then(data => {
-
-                        if (data.error) {
-                            const errorStatus = data.error.status
-                            const errorMessage = data.error.message
-
-                            console.log(`HTTP Error ${errorStatus}: ${errorMessage}`)
-
-                            if (errorMessage.includes('access token expired')) {
-                                setValidateAccessToken(errorStatus)
-                                localStorage.setItem('tokenExpired', true)
-                            }
-                        }
-                        
-                        if (data.snapshot_id) {
-                            setPlaylistSaved(true)
-                            playlistSaved && console.log(`Playlist saved!`)
-                            setPlaylistName('')
-                            setPlaylistToSave([])
-                            setPlaylistTracks([])
-                            setSaved(true)
-                            setSaving(false)
-                            console.log(data)
-                        }
-                    })
-                } catch (e) {
-                    console.error(`${e.message}`)
-                }
-
-                // setPlaylistName()
-                // setPlaylistTracks()
-            }
-
-            await createPlaylist()
-            
-        }  
+            setPlaylistName('')
+            setPlaylistUris([])
+            setPlaylistTracks([])
+            setSaved(true)
+            setSaving(false)
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -237,26 +90,23 @@ function App() {
                 <div className="container">
                     <SearchBar
                         accessToken={accessToken}
-                        getProfile={getProfile}
                         setSearching={setSearching}
-                        setValidateAccessToken={setValidateAccessToken}
-                        setResults={setResults}
-                        validateAccessToken={validateAccessToken} />
+                        setResults={setResults} />
 
                     <div className="columns">
                         <div className="column column--left">
                             <SearchResults
                                 data={results.tracks.items}
                                 searching={searching}
-                                onAdd={onAdd}
+                                onAdd={handleAddTrack}
                                 setPlaylistTracks={setPlaylistTracks} />
                         </div>
 
                         <div className="column column--right">
                             <Playlist
                                 onPlaylistNameChange={onPlaylistNameChange}
-                                onSave={onSave}
-                                onRemove={onRemove}
+                                onSave={handleSavePlaylist}
+                                onRemove={handleRemoveTrack}
                                 playlistName={playlistName}
                                 playlistTracks={playlistTracks}
                                 saved={saved}

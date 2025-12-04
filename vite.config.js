@@ -9,6 +9,10 @@ export default defineConfig(({ mode }) => {
     define: {
       __APP_ENV__: JSON.stringify(env.APP_ENV)
     },
-    plugins: [react()]
+    plugins: [react()],
+    server: {
+      host: '127.0.0.1',
+      port: 5173
+    }
   }
 })
