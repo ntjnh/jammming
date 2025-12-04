@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest'
 
 // Mock PKCE module BEFORE importing authentication
-vi.mock('../../src/modules/codeChallenge.js', async () => {
+vi.mock('../../src/features/auth/codeChallenge.js', async () => {
     return {
         generateCodeVerifier: () => 'TEST_VERIFIER_123',
         // deterministic fake hash
