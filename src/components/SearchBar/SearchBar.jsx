@@ -28,6 +28,7 @@ export default function SearchBar({ accessToken, setSearching, setResults }) {
         setSearching(prev => !prev)
     }
 
+    // // test search handler
     // const handleSearch = e => {
     //     e.preventDefault()
     //     const query = searchRef.current.value.toLowerCase()
