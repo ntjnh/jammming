@@ -69,8 +69,8 @@ function App() {
 
         try {
             const userId = localStorage.getItem('user_id')
-            await createPlaylist(userId, playlistName, accessToken)
-            await savePlaylist(playlistToSave, accessToken)
+            const playlistId = await createPlaylist(userId, playlistName, accessToken)
+            await savePlaylist(playlistId, playlistToSave, accessToken)
 
             setPlaylistName('')
             setPlaylistToSave([])

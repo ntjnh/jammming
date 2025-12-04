@@ -4,14 +4,12 @@ const getProfile = async accessToken => {
             Authorization: 'Bearer ' + accessToken
         }
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP Error. Status: ${res.status} - ${res.message}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            throw new Error(`${data.error.status} ${data.error.message}`)
         }
 
-        return res.json()
-    })
-    .then(data => {
         localStorage.setItem('user_id', data.id)
         return data
     })

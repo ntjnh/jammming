@@ -1,5 +1,5 @@
 const createPlaylist = async (userId, playlistName, accessToken) => {
-    await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    return await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
         method: 'POST',
         body: JSON.stringify({
             name: playlistName,

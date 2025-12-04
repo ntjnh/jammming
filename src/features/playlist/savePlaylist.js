@@ -1,7 +1,5 @@
-const savePlaylist = async (playlist, accessToken) => {
-    const id = localStorage.getItem('playlist_id')
-
-    await fetch(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+const savePlaylist = async (id, playlist, accessToken) => {
+    return await fetch(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
         method: 'POST',
         body: JSON.stringify({
             uris: playlist
@@ -20,7 +18,7 @@ const savePlaylist = async (playlist, accessToken) => {
     })
     .then(data => {
         if (data.snapshot_id) {
-            localStorage.setItem('playlist_saved', true)
+            localStorage.setItem('playlist_id', '')
 
             return data
         }
