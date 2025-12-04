@@ -3,6 +3,7 @@ import Button from '../Button/Button'
 import styles from './SearchBar.module.css'
 import authentication from '../../features/auth/authentication'
 import getProfile from '../../features/user/getProfile'
+import searchTracks from '../../features/search/searchTracks'
 
 export default function SearchBar({
     accessToken,
@@ -25,31 +26,10 @@ export default function SearchBar({
         }
 
         const query = searchRef.current.value
-        const type = 'track'
-        const market = 'GB'
-        const limit = 10
-        let endpoint = 'https://api.spotify.com/v1/search'
-        endpoint += `?q=${query}&type=${type}&market=${market}&limit=${limit}`
+        const tracks = await searchTracks(query, accessToken)
 
-        await fetch(endpoint, {
-            headers: {
-                Authorization: 'Bearer ' + accessToken
-            }
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`HTTP Error. Status: ${res.status} - ${res.message}`)
-            }
-
-            return res.json()
-        })
-        .then(data => {
-            // console.log('full response:')
-            // console.log(data)
-            setResults(data)
-            setSearching(prev => !prev)
-        })
-        .catch(e => console.log(e))
+        setResults(tracks)
+        setSearching(prev => !prev)
     }
 
     // const handleSearch = e => {
