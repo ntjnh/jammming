@@ -17,7 +17,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 // Mock BEFORE importing the module
-vi.mock('../../src/modules/codeChallenge.js', async () => {
+vi.mock('../../src/features/auth/codeChallenge.js', async () => {
     return { 
         generateCodeVerifier: () => 'TEST_VERIFIER_123',
         sha256: async () => new Uint8Array([1, 2, 3, 4]),
@@ -25,7 +25,7 @@ vi.mock('../../src/modules/codeChallenge.js', async () => {
     }
 })
 
-import { base64encode, generateCodeVerifier, sha256 } from '../../src/modules/codeChallenge'
+import { base64encode, generateCodeVerifier, sha256 } from '../../src/features/auth/codeChallenge'
 
 describe('Generate code challenge', () => {
     it('generateCodeVerifier returns a code verifier string', () => {

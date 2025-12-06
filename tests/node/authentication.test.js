@@ -37,8 +37,8 @@ vi.stubGlobal('window', {
 })
 
 // Import module AFTER mocks
-import authentication from '../../src/modules/authentication'
-import * as codeChallenge from '../../src/modules/codeChallenge'
+import authentication from '../../src/features/auth/authentication'
+import * as codeChallenge from '../../src/features/auth/codeChallenge'
 
 describe('authentication()', () => {
     beforeAll(() => {
