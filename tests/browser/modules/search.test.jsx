@@ -1,43 +1,48 @@
 import { render } from 'vitest-browser-react'
-import { describe, expect, test } from 'vitest'
+import { userEvent } from '@vitest/browser/context'
+import { expect, test } from 'vitest'
 import App from '../../../src/App'
+import mockResults from '../../mocks/songs'
 
-describe('Search for a track', () => {
-    test('Returning matching results', async () => {
-        const { getByTestId } = await render(<App />)
-        const searchForm = getByTestId('search')
-        const results = getByTestId('search-results')
+test('Returns matching results', async () => {
+    const user = userEvent.setup()
 
-        // Get elements
-        const searchInput = searchForm.getByRole('input')
-        const button = searchForm.getByRole('button', { name: 'Search', exact: true })
+    const searchHandler = (searchRef, setResults) => {
+        return e => {
+            e.preventDefault()
+            const query = searchRef.current.value.toLowerCase()
 
-        // Type search query into the text input
-        await searchInput.fill('no')
+            setResults(prev => {
+                prev.tracks.items = prev.tracks.items
+                    .filter(t => t.name.toLowerCase().includes(query))
+                return prev
+            })
+        }
+    }
 
-        // Click on search
-        await button.click()
+    const { getByRole, getByTestId } = render(
+        <App
+            handleSearch={(e, searchRef, setResults) => 
+                searchHandler(e, searchRef, setResults)}
+            initialResults={mockResults} />
+    )
 
-        // Look for loading icon
+    // Get elements
+    const searchForm = getByTestId('search')
+    const results = getByTestId('search-results')
+    const searchInput = searchForm.getByRole('textbox')
+    const button = getByRole('button', { name: 'Search' })
 
-        // Check if there are any results
-            // ul.tracklist -> children length
-        await expect.element(results).toContainElement()
+    // Type in query and click Search
+    await user.type(searchInput, 'no')
+    await user.click(button)
 
-        // Check results for matches to query
-            // Loop through children and check if search term is contained in each track name string
-        await expect.element(results).toContainElement(california)
+    // Check for the expected results
+    const expectedResults = ['No Solution', 'No Excuses', 'Another Love Song']
 
-        // Locate track in the search results
-        // const californiaResult = results.getByTestId('results-california')
-
-        // // Click on the track
-        // await californiaResult.click()
-
-        // // Locate the track in the playlist
-        // const california = results.getByTestId('playlist-california')
-
-        // // Locate the track in the playlist
-        // await expect.element(results).toContainElement(california)
+    expectedResults.forEach(async r => {
+        await expect.element(
+            results.getByText(r, { exact: true })
+        ).toBeInTheDocument()
     })
 })
