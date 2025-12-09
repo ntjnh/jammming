@@ -14,6 +14,9 @@ export default function Track({
         list === 'results' ? onAdd(e) : onRemove(e)
     }
 
+    const ariaLabel = list === 'results' ?
+        `Add ${song} to playlist` : `Remove ${song} from playlist`
+
     return (
         <li className={styles.track} data-testid={testid}>
             <h3 className={styles.song}>{song}</h3>
@@ -26,6 +29,7 @@ export default function Track({
                 onClick={handleClick}
                 id={trackId}
                 type="button"
+                aria-label={ariaLabel}
             >
                 {list === 'results' ? '+' : '-'}
             </button>
