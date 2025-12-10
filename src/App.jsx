@@ -17,7 +17,7 @@ import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
 
-function App({ handleSearch, initialResults }) {
+function App({ handleSave, handleSearch, initialResults }) {
     const searchRef = useRef(null)
     const [results, setResults] = useState(initialResults || { tracks: { items: []}})
     const [searching, setSearching] = useState(false)
@@ -131,7 +131,7 @@ function App({ handleSearch, initialResults }) {
                         <div className="column column--right">
                             <Playlist
                                 onPlaylistNameChange={onPlaylistNameChange}
-                                onSave={handleSavePlaylist}
+                                onSave={handleSave || handleSavePlaylist}
                                 onRemove={handleRemoveTrack}
                                 playlistName={playlistName}
                                 playlistTracks={playlistTracks}
