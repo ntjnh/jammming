@@ -38,7 +38,8 @@ function App({ handleSave, handleSearch, initialResults }) {
     }
 
     const handleRemoveTrack = e => {
-        const updated = removeTrack(e.target.id, playlistTracks, playlistUris)
+        const idx = e.target.dataset.idx
+        const updated = removeTrack(Number(idx), playlistTracks, playlistUris)
 
         setPlaylistTracks(updated.playlistTracks)
         setPlaylistUris(updated.playlistUris)
