@@ -12,7 +12,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo Setting up Node.js...
+    - run: echo Set up Node.js
       shell: bash
 
     - name: Use Node.js
@@ -20,7 +20,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - run: echo Installing npm packages...
+    - run: echo Install npm packages
       shell: bash
 
     - run: npm ci
