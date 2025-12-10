@@ -40,12 +40,12 @@ describe('Application renders', async () => {
         // Search results
         await expect.element(results).toBeVisible()
         await expect.element(resultsHeading).toHaveTextContent('Results')
-        // await expect.element(results.getByText('Search results will appear here.')).toBeVisible()
+        await expect.element(results.getByText('Search results will appear here.')).toBeVisible()
         
         // Playlist builder
         await expect.element(playlist).toBeVisible()
         await expect.element(playlistName).toHaveValue('New Playlist 1')
-        // await expect.element(results.getByText('Add a track to start building your playlist.')).toBeVisible()
+        await expect.element(playlist.getByText('Add a track to start building your playlist.')).toBeVisible()
         await expect.element(saveBtn).toBeVisible()
     })
 })    

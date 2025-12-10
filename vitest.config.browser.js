@@ -14,6 +14,7 @@ export default defineConfig({
                 height: 900
             }
         },
+        testTimeout: 4000,
         globals: true,
         include: ['tests/browser/**/*.test.{js,jsx}'],
         setupFiles: ['tests/browser/setup.browser.js']

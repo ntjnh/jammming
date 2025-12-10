@@ -1,23 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
+import authentication from './features/auth/authentication'
 import getRefreshToken from './features/auth/getRefreshToken'
 import getToken from './features/auth/getToken'
 import addTrack from './features/playlist/addTrack'
-
-import mockResults from '../tests/mocks/songs'
+import createPlaylist from './features/playlist/createPlaylist'
+import removeTrack from './features/playlist/removeTrack'
+import savePlaylist from './features/playlist/savePlaylist'
+import searchTracks from './features/search/searchTracks'
+import getProfile from './features/user/getProfile'
 
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import SearchBar from './components/SearchBar/SearchBar'
 import SearchResults from './components/SearchResults/SearchResults'
 import Playlist from './components/Playlist/Playlist'
-import removeTrack from './features/playlist/removeTrack'
-import createPlaylist from './features/playlist/createPlaylist'
-import savePlaylist from './features/playlist/savePlaylist'
 
-function App() {
-    const [results, setResults] = useState(mockResults)
+function App({ handleSave, handleSearch, initialResults }) {
+    const searchRef = useRef(null)
+    const [results, setResults] = useState(initialResults || { tracks: { items: []}})
     const [searching, setSearching] = useState(false)
     const [saving, setSaving] = useState(false)
     const [saved, setSaved] = useState(false)
@@ -60,7 +62,32 @@ function App() {
             const refreshToken = async () => await getRefreshToken(setAccessToken)
             refreshToken()
         }
-    }, [])    
+    }, [])
+
+    const handleTestSubmit = e => {
+        e.preventDefault()
+        handleSearch(e, searchRef, setResults)
+    }
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+
+        setSearching(prev => !prev)
+
+        // check for token first
+        if (!accessToken) {
+            await authentication()
+            getProfile(accessToken)
+        } else {
+            getProfile(accessToken)
+        }
+
+        const query = searchRef.current.value
+        const tracks = await searchTracks(query, accessToken)
+
+        setResults(tracks)
+        setSearching(prev => !prev)
+    }
 
     const handleSavePlaylist = async e => {
         e.preventDefault()
@@ -89,9 +116,8 @@ function App() {
                 <div className="bg"></div>
                 <div className="container">
                     <SearchBar
-                        accessToken={accessToken}
-                        setSearching={setSearching}
-                        setResults={setResults} />
+                        searchRef={searchRef}
+                        onSubmit={handleSearch ? handleTestSubmit : handleSubmit} />
 
                     <div className="columns">
                         <div className="column column--left">
@@ -105,7 +131,7 @@ function App() {
                         <div className="column column--right">
                             <Playlist
                                 onPlaylistNameChange={onPlaylistNameChange}
-                                onSave={handleSavePlaylist}
+                                onSave={handleSave || handleSavePlaylist}
                                 onRemove={handleRemoveTrack}
                                 playlistName={playlistName}
                                 playlistTracks={playlistTracks}
