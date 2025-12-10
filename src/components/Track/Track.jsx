@@ -2,6 +2,7 @@ import styles from './Track.module.css'
 
 export default function Track({
     trackId,
+    trackIdx,
     song,
     artist,
     album,
@@ -28,6 +29,7 @@ export default function Track({
                 className={styles.toggle}
                 onClick={handleClick}
                 id={trackId}
+                data-idx={trackIdx}
                 type="button"
                 aria-label={ariaLabel}
             >

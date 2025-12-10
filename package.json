@@ -1,14 +1,14 @@
 {
   "name": "jammming",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:browser": "vitest -c vitest.config.browser.js",
+    "test:browser": "vitest -c vitest.config.browser.js --run",
     "test:node": "vitest -c vitest.config.node.js",
     "test": "npm run test:node && npm run test:browser"
   },

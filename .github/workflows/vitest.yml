@@ -17,15 +17,12 @@ jobs:
         with:
             node-version: ${{ matrix.node-version }}
 
-      - run: echo Installing Playwright browsers...
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - run: echo Building the app...
       - name: Build the React app
         run: npm run build --if-present
 
-      - run: echo Running the browser tests...
       - name: Run the browser tests
         run: npm run test:browser
 
@@ -40,6 +37,5 @@ jobs:
         with:
             node-version: ${{ matrix.node-version }}
 
-      - run: echo Running the node tests...
       - name: Run the node tests
         run: npm run test:node
