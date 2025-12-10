@@ -23,6 +23,6 @@ export default defineConfig({
         include: ['react', 'react-dom', 'react-dom/client']
     },
     server: {
-        hmr: false,
+        hmr: false
     }
 })
