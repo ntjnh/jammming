@@ -18,5 +18,8 @@ export default defineConfig({
         globals: true,
         include: ['tests/browser/**/*.test.{js,jsx}'],
         setupFiles: ['tests/browser/setup.browser.js']
+    },
+    optimizeDeps: {
+        include: ['react', 'react-dom', 'react-dom/client']
     }
 })

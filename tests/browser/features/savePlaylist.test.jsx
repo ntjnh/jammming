@@ -29,7 +29,7 @@ test('creates and saves the playlist', async () => {
     const testSongs = [testSong1, testSong2, testSong3]
 
     // add songs to playlist
-    testSongs.forEach(async ({ track, title }) => {
+    for (const { track, title } of testSongs) {
         await expect.element(results).toContainElement(track)
 
         const addButton = track.getByRole('button')
@@ -37,7 +37,7 @@ test('creates and saves the playlist', async () => {
         
         const trackName = playlist.getByText(title, { exact: true })
         await expect.element(playlist).toContainElement(trackName)
-    })
+    }
 
     // enter a name for the playlist
     await user.fill(playlist.getByRole('textbox'), 'Vitest Playlist')
