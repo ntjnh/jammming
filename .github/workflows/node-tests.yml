@@ -1,0 +1,21 @@
+name: Node Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  node_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [25.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./actions/setup-env
+        with:
+            node-version: ${{ matrix.node-version }}
+
+      - name: Run the node tests
+        run: npm run test:node
