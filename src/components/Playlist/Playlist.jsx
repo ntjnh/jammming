@@ -4,8 +4,9 @@ import styles from './Playlist.module.css'
 import spinner from '../../assets/spinner.svg'
 
 export default function Playlist({
-    playlistName,
     onPlaylistNameChange,
+    playlistName,
+    playlistRef,
     playlistTracks,
     saved,
     saving,
@@ -21,8 +22,9 @@ export default function Playlist({
                     type="text"
                     name="playlistName"
                     id="playlistName"
-                    placeholder="New Playlist"
+                    placeholder="Name your playlist"
                     value={playlistName}
+                    ref={playlistRef}
                 />
 
                 {saving ? <img className="spinner" src={spinner} /> :
@@ -40,10 +42,16 @@ export default function Playlist({
                 }
 
                 {(saved && !playlistTracks.length) && 
-                    <h3 className={styles.success}>
-                        Your playlist has been saved!<br />
-                        Search for more tracks to start creating another one!
-                    </h3>
+                    <div className={styles.success}>
+                        <h3 className={styles.success}>
+                            Your playlist
+                            <span>{localStorage.getItem('playlist_name')}</span>
+                            has been saved!
+                        </h3>
+                        <h4>
+                            Search for more tracks to start creating another one!
+                        </h4>
+                    </div>
                 }
 
                 <Button

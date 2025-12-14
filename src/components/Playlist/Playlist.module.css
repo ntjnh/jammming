@@ -45,6 +45,25 @@
     border-bottom: 1px solid var(--pelorous-500);
 }
 
+.success h3 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.success h3 > span {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: .25rem 0;
+}
+
+.success h4 {
+    font-size: .875rem;
+    font-weight: 500;
+    margin: 0 auto;
+    max-width: 25ch;
+}
+
 @media (min-width: 1024px) {
     .results {
         padding: 1.125rem 1.5rem;
