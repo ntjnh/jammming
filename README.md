@@ -30,6 +30,18 @@ You will use your knowledge of React components, passing state and requests with
   - You can also include other information – the design is up to you
 - Users can export their custom playlist to their personal Spotify account
 
+#### Extra Features
+
+The following are extra features/additions I put in to make the app a little bit more interesting:
+
+- Loading spinners
+  - While waiting for search results to appear
+  - While waiting for playlist to save to Spotify
+- Playlist name is remembered for dynamic success message after save
+- I chose not to remove the ability to add a track to the playlist more than once
+  - I personally do it often because I like the song that much and want more chances to hear it again! 😂
+- After saving a playlist, you just start adding tracks again to start the next one
+
 ## Project Tasks
 
 - [x] [Set Up Your Local Environment](#set-up-your-local-environment)
