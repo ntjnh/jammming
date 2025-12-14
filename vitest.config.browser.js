@@ -8,13 +8,14 @@ export default defineConfig({
             provider: 'playwright',
             enabled: true,
             headless: true,
-            ui: false,
             instances: [{ browser: 'chromium' }],
             viewport: {
                 width: 1440, 
                 height: 900
             }
         },
+        watch: false,
+        ui: false,
         testTimeout: 4000,
         globals: true,
         include: ['tests/browser/**/*.test.{js,jsx}'],
