@@ -34,7 +34,7 @@ describe('Application renders', async () => {
         const resultsHeading = results.getByTestId('results-heading')
 
         const playlist = getByTestId('playlist')
-        const playlistName = playlist.getByPlaceholder('New Playlist')
+        const playlistName = playlist.getByPlaceholder('Name your playlist')
         const saveBtn = playlist.getByText('Save to Spotify')
 
         // Search results
