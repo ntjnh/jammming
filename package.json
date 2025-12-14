@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:browser": "vitest -c vitest.config.browser.js --run",
+    "test:browser": "vitest -c vitest.config.browser.js --run --no-watch",
     "test:node": "vitest -c vitest.config.node.js",
     "test": "npm run test:node && npm run test:browser"
   },
