@@ -1,4 +1,6 @@
 const createPlaylist = async (userId, playlistName, accessToken) => {
+    localStorage.setItem('playlist_name', playlistName)
+
     return await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
         method: 'POST',
         body: JSON.stringify({

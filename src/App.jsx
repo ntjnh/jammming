@@ -19,6 +19,7 @@ import Playlist from './components/Playlist/Playlist'
 
 function App({ handleSave, handleSearch, initialResults }) {
     const searchRef = useRef(null)
+    const playlistRef = useRef(null)
     const [results, setResults] = useState(initialResults || { tracks: { items: []}})
     const [searching, setSearching] = useState(false)
     const [saving, setSaving] = useState(false)
@@ -96,7 +97,8 @@ function App({ handleSave, handleSearch, initialResults }) {
 
         try {
             const userId = localStorage.getItem('user_id')
-            const playlistId = await createPlaylist(userId, playlistName, accessToken)
+            const plName = playlistRef.current.value
+            const playlistId = await createPlaylist(userId, plName, accessToken)
             await savePlaylist(playlistId, playlistUris, accessToken)
 
             setPlaylistName('')
@@ -135,6 +137,7 @@ function App({ handleSave, handleSearch, initialResults }) {
                                 onSave={handleSave || handleSavePlaylist}
                                 onRemove={handleRemoveTrack}
                                 playlistName={playlistName}
+                                playlistRef={playlistRef}
                                 playlistTracks={playlistTracks}
                                 saved={saved}
                                 saving={saving}
