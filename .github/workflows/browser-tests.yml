@@ -2,6 +2,8 @@ name: Browser Tests
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   browser_tests:
