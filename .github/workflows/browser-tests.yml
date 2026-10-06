@@ -2,13 +2,15 @@ name: Browser Tests
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   browser_tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [25.x]
+        node-version: ['24.x']
     steps:
       - uses: actions/checkout@v4
       - uses: ./actions/setup-env

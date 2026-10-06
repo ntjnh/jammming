@@ -1,12 +1,10 @@
 import { render } from 'vitest-browser-react'
-import { userEvent } from '@vitest/browser/context'
+import { userEvent } from 'vitest/browser'
 import { expect, test } from 'vitest'
 import App from '../../../src/App'
 import mockResults from '../../mocks/songs'
 
 test('Returns matching results', async () => {
-    const user = userEvent.setup()
-
     const searchHandler = (searchRef, setResults) => {
         return e => {
             e.preventDefault()
@@ -20,7 +18,7 @@ test('Returns matching results', async () => {
         }
     }
 
-    const { getByRole, getByTestId } = render(
+    const screen = await render(
         <App
             handleSearch={(e, searchRef, setResults) => 
                 searchHandler(e, searchRef, setResults)}
@@ -28,14 +26,14 @@ test('Returns matching results', async () => {
     )
 
     // Get elements
-    const searchForm = getByTestId('search')
-    const results = getByTestId('search-results')
+    const searchForm = screen.getByTestId('search')
+    const results = screen.getByTestId('search-results')
     const searchInput = searchForm.getByRole('textbox')
-    const button = getByRole('button', { name: 'Search' })
+    const button = screen.getByRole('button', { name: 'Search' })
 
     // Type in query and click Search
-    await user.type(searchInput, 'no')
-    await user.click(button)
+    await userEvent.type(searchInput, 'no')
+    await userEvent.click(button)
 
     // Check for the expected results
     const expectedResults = ['No Solution', 'No Excuses', 'Another Love Song']

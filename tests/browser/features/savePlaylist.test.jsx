@@ -1,12 +1,11 @@
 import { render } from 'vitest-browser-react'
-import { userEvent } from '@vitest/browser/context'
+import { userEvent } from 'vitest/browser'
 import { expect, test, vi } from 'vitest'
 import App from '../../../src/App'
 import mockResults from '../../mocks/songs'
 
 test('creates and saves the playlist', async () => {
-    const mockSave = vi.fn()
-    const user = userEvent.setup()
+    const mockSave = vi.fn((e) => e.preventDefault())
     const { getByTestId } = await render(
         <App initialResults={mockResults} handleSave={mockSave} />
     )
@@ -33,17 +32,17 @@ test('creates and saves the playlist', async () => {
         await expect.element(results).toContainElement(track)
 
         const addButton = track.getByRole('button')
-        await user.click(addButton)
+        await userEvent.click(addButton)
         
         const trackName = playlist.getByText(title, { exact: true })
         await expect.element(playlist).toContainElement(trackName)
     }
 
     // enter a name for the playlist
-    await user.fill(playlist.getByRole('textbox'), 'Vitest Playlist')
+    await userEvent.fill(playlist.getByRole('textbox'), 'Vitest Playlist')
 
     // click save
-    await user.click(playlist.getByRole('button', { name: 'Save to Spotify' }))
+    await userEvent.click(playlist.getByRole('button', { name: 'Save to Spotify' }))
 
     expect(mockSave).toHaveBeenCalledOnce()
 })
