@@ -24,6 +24,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Vitest browser screenshots
+# Vitest (mainly failure screenshots)
+.vitest/
 tests/**/__screenshots__/
 __screenshots__/

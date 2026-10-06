@@ -27,7 +27,7 @@ export default function Playlist({
                     ref={playlistRef}
                 />
 
-                {saving ? <img className="spinner" src={spinner} /> :
+                {saving ? <img className="spinner" src={spinner} alt="" /> :
                     <TrackList
                         list="playlist"
                         tracks={playlistTracks}

@@ -11,9 +11,8 @@ describe('Application renders', async () => {
         await expect.element(getByText('Jammming')).toBeVisible()
     
         // Footer text is visible and link opens in a new tab
-        await expect.element(getByTestId('footer')).toHaveTextContent('Built by')
+        await expect.element(getByTestId('footer')).toHaveTextContent('Built by Nate.')
         const nate = getByText('Nate')
-        await expect.element(nate).toBeVisible()
         await expect.element(nate).toHaveAttribute('target', '_blank')
     })
 

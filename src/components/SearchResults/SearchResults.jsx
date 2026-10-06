@@ -8,7 +8,7 @@ export default function SearchResults({ data, searching, onAdd }) {
             <h2 data-testid="results-heading">Results</h2>
 
             {searching ?
-                <img className="spinner" src={spinner} /> : 
+                <img className="spinner" src={spinner} alt="" /> : 
 
                 data.length > 0 ? 
                     <TrackList onAdd={onAdd} list="results" tracks={data} /> :
